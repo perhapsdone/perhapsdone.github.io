@@ -61,6 +61,135 @@
     <meta name="twitter:url" content="https://www.huanengfitting.com/" />
     <link rel="stylesheet" href="themes/template/0614/static/css/zxl.css">
     <link rel="stylesheet" href="themes/template/0614/static/css/inquirypwd.css">
+
+    <!-- 在<head>标签内添加以下样式 -->
+    <style>
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-btn {
+            padding: 5px 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .language-btn.active {
+            background: #276DC1;
+            color: white;
+            border-color: #276DC1;
+        }
+    </style>
+    <script>
+        // 多语言配置
+        const i18n = {
+            en: {
+                // 导航
+                nav: {
+                    home: "Home",
+                    about: "About Us",
+                    products: "Products",
+                    contact: "Contact Us"
+                },
+                // 联系信息
+                contact: {
+                    title: "Contact Us",
+                    tel: "Tel",
+                    email: "E-mail",
+                    address: "Address",
+                    wechat: "WeChat",
+                    founded: "Established Date: November 11, 2020",
+                    companyAddress: "Address: North of Fiscal Bureau Residential Area, Jianshe East Road, Renqiu City, Hebei Province"
+                },
+                // 页脚
+                footer: {
+                    navigation: "Navigation",
+                    contactUs: "Contact Us",
+                    address: "Address",
+                    copyright: "Copyright © Hebei Zhenguan International Trade Co., Ltd. All Rights Reserved."
+                },
+                index: {
+                    abount_title: "About Us",
+                    abount_content: "Zhenguan International Trading Co., Ltd. is a comprehensive manufacturing and trading enterprise with a high reputation in the industry, focusing on the production and sales of power crossarm, laser cutting custom iron parts, steel strand, pre-twisted tensioning clamp and other products. We are committed to providing customers around the world with high quality, high performance power accessories and customized solutions to help them achieve efficient and safe project implementation. Since its establishment, we have won wide recognition from customers with excellent product quality, leading technical strength and excellent service. The company has first-class production equipment and perfect quality control system, equipped with an experienced and skilled professional team, from product development...",
+                    products_title: "Products",
+                    products_content: "Our company specializes in the production and sales of power industry related products, including power crossarm, laser cutting custom iron parts, steel strand, pre-twisted tensioning clamp and so on. All products are made of high-quality raw materials and exquisite technology, stable performance, complete variety, support to map to sample processing customization, to meet diverse needs. Whether it is structural strength, accuracy requirements or service life, it is in line with industry standards and is trusted by customers. With fast delivery, strict quality control and excellent after-sales service, we provide customers with cost-effective product solutions...",
+                    read_more: "READ MORE",
+                    more: "More +"
+                }
+            },
+            zh: {
+                nav: {
+                    home: "首页",
+                    about: "关于我们",
+                    products: "产品中心",
+                    contact: "联系我们"
+                },
+                contact: {
+                    title: "联系我们",
+                    tel: "电话",
+                    email: "电子邮箱",
+                    address: "地址",
+                    wechat: "微信",
+                    founded: "成立时间：2020年11月11日",
+                    companyAddress: "地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧"
+                },
+                footer: {
+                    navigation: "导航",
+                    contactUs: "联系我们",
+                    address: "地址",
+                    copyright: "版权所有 © 河北真观国际贸易有限公司"
+                },
+                index: {
+                    abount_title: "关于我们",
+                    abount_content: "真观国际贸易有限公司是一家在行业内享有盛誉的综合性制造与贸易企业，专注于生产和销售电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等产品。我们致力于为全球客户提供高品质、高性能的电力配件和定制解决方案，帮助他们实现高效、安全的项目实施。自成立以来，我们以卓越的产品质量、领先的技术实力和优质的服务赢得了客户的广泛认可。公司拥有一流的生产设备和完善的质控体系，配备了一支经验丰富、技术过硬的专业团队，从产品研发、制造到售后服务，每一步都精益求精。我们的产品不仅种类齐全、款式丰富，还支持来图来样加工定制，充分满足客户的个性化需求。在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。...",
+                    products_title: "产品简介",
+                    products_content: "我们公司专业生产和销售电力行业相关产品，包括电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等。所有产品均采用优质原材料和精湛工艺制造，性能稳定，种类齐全，支持来图来样加工定制，满足多样化需求。无论是结构强度、精度要求还是使用寿命，均符合行业标准，深受客户信赖。我们以快速发货、严格质控和优良售后服务，为客户提供高性价比的产品解决方案...",
+                    read_more: "了解更多",
+                    more: "更多 +"
+                }
+            }
+        };
+
+        // 初始化语言
+        let currentLang = localStorage.getItem('selectedLang') || 'en';
+
+        function updateContent () {
+            // 更新导航
+            document.querySelectorAll('[data-i18n-nav]').forEach(el => {
+                const key = el.getAttribute('data-i18n-nav');
+                el.textContent = i18n[currentLang].nav[key];
+            });
+
+            // 更新联系信息
+            document.querySelectorAll('[data-i18n-contact]').forEach(el => {
+                const key = el.getAttribute('data-i18n-contact');
+                el.textContent = i18n[currentLang].contact[key];
+            });
+
+            // 更新页脚
+            document.querySelectorAll('[data-i18n-footer]').forEach(el => {
+                const key = el.getAttribute('data-i18n-footer');
+                el.textContent = i18n[currentLang].footer[key];
+            });
+
+            // 更新内容
+            document.querySelectorAll('[data-i18n-index]').forEach(el => {
+                const key = el.getAttribute('data-i18n-index');
+                el.textContent = i18n[currentLang].index[key];
+            });
+
+            // 更新页面标题和元数据
+            document.title = i18n[currentLang].contact.title;
+            document.documentElement.lang = currentLang;
+        }
+    </script>
 </head>
 
 <body class="download">
@@ -88,12 +217,20 @@
                 </a>
             </div>
             <div class="h-bot fix">
+                <!-- 修改导航菜单 -->
                 <ul class="navlist fix">
-                    <li class="nav-active"> <a href="index.html" title="Home">Home</a> </li>
-                    <li> <a href="about-us.html" title="About Us">About Us</a> </li>
-                    <li> <a href="products.html" title="Products">Products</a></li>
-                    <li> <a href="contact-us.html" title="Contact Us">Contact Us</a> </li>
+                    <li class="nav-active"><a href="index.html" data-i18n-nav="home">Home</a></li>
+                    <li><a href="about-us.html" data-i18n-nav="about">About Us</a></li>
+                    <li><a href="products.html" data-i18n-nav="products">Products</a></li>
+                    <li><a href="contact-us.html" data-i18n-nav="contact">Contact Us</a></li>
                 </ul>
+
+            </div>
+
+            <!-- 在<body>开始标签后添加语言切换按钮 -->
+            <div class="language-switcher">
+                <button class="language-btn" data-lang="en">EN</button>
+                <button class="language-btn" data-lang="zh">中文</button>
             </div>
         </header>
 
@@ -103,12 +240,19 @@
                 <div class="slider" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                     <div class="item"> <a href="products.html">
                             <picture>
-                                <source media="(min-width: 480px)"
+                                <!-- <source media="(min-width: 480px)"
                                     srcset="https://s21.ax1x.com/2024/11/21/pAWOixP.png?x-oss-process=image/format,webp,image/resize,m_pad,h_750,w_1920,color_FFFFFF">
                                 <source media="(max-width: 479px)"
                                     srcset="https://s21.ax1x.com/2024/11/21/pAWOixP.png?x-oss-process=image/format,webp,image/resize,m_pad,h_187,w_480,color_FFFFFF">
                                 <img class="pic"
-                                    src="https://s21.ax1x.com/2024/11/21/pAWOixP.png?x-oss-process=image/format,webp,image/resize,m_pad,h_750,w_1920,color_FFFFFF" />
+                                    src="https://s21.ax1x.com/2024/11/21/pAWOixP.png?x-oss-process=image/format,webp,image/resize,m_pad,h_750,w_1920,color_FFFFFF" /> -->
+
+                                <source media="(min-width: 480px)"
+                                    srcset="https://perhapsdone.github.io/images/home/home.png?x-oss-process=image/format,webp,image/resize,m_pad,h_750,w_1920,color_FFFFFF">
+                                <source media="(max-width: 479px)"
+                                    srcset="https://perhapsdone.github.io/images/home/home.png?x-oss-process=image/format,webp,image/resize,m_pad,h_187,w_480,color_FFFFFF">
+                                <img class="pic"
+                                    src="https://perhapsdone.github.io/images/home/home.png?x-oss-process=image/format,webp,image/resize,m_pad,h_750,w_1920,color_FFFFFF" />
                             </picture>
                         </a> </div>
                     <div class="item"> <a href="about-us.html" title="Hebei Zhenguan International Trade Co., Ltd.">
@@ -134,7 +278,6 @@
                 </div>
             </div>
         </div>
-
 
         <script src="themes/template/0614/static/js/slide2.js"></script>
         <script>
@@ -178,17 +321,17 @@
                     <div class="tankaunga"></div>
                     <div class="item-body wow fadeInUp">
 
-                        <p class="item-title"><a href="about-us.html" title="About Us">About Us</a></p>
+                        <p class="item-title"><a href="about-us.html" title="About Us"
+                                data-i18n-index="abount_title">About Us</a></p>
                         <!-- <p class="item-subt"><a href="about-us.html"
                                 title="Hebei Zhenguan International Trade Co., Ltd.">Shijiazhuang Huaneng
                                 Electric Power Fitting Co., Ltd.</a></p> -->
-                        <p class="item-desc"> <a href="about-us.html"
-                                title="Shijiazhuang Huaneng Electric Power Fitting Co. Ltd. is a new electric power fittings company with abilities of R&D, manufacture and trade. The electric power fitting company locates in No.189, Hengshan Street, Shijiazhuang High-tech Development Zone, Hebei Province, China, covering the area 26,593 square meters.
-Shijiazhuang Huaneng Electric Power Fitting Co. Ltd. specially manufactures preformed helical fittings which are widely used in transmission line.">
-                                本公司是一家生产销售各种规格型号电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等产品的企业。拥有熟练的质控人员和工人，无论款式、性能还是质量都深得好评。我们支持来图来样加工定制，产品种类齐全，款式丰富，自有合作物流发货速度。公司自成立以来，一直秉承以质量锻造品质以售后提升价值的理念足于行业。公司始终以优良的品质、良好的信誉及合理的价格深受广大客户的好评我们希望能与商界同仁真诚合作，共谋发展，寻求交流合作!
-                                ...</a> </p>
+                        <p class="item-desc"> <a href="about-us.html" title="" data-i18n-index="abount_content">
+                                真观国际贸易有限公司是一家在行业内享有盛誉的综合性制造与贸易企业，专注于生产和销售电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等产品。我们致力于为全球客户提供高品质、高性能的电力配件和定制解决方案，帮助他们实现高效、安全的项目实施。自成立以来，我们以卓越的产品质量、领先的技术实力和优质的服务赢得了客户的广泛认可。公司拥有一流的生产设备和完善的质控体系，配备了一支经验丰富、技术过硬的专业团队，从产品研发、制造到售后服务，每一步都精益求精。我们的产品不仅种类齐全、款式丰富，还支持来图来样加工定制，充分满足客户的个性化需求。在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。...</a>
+                        </p>
                         <h1 class="disnone"> ADSS Fittings</h1>
-                        <a class="item-btn" href="about-us.html" rel="nofollow">Read More</a>
+                        <a class="item-btn" href="about-us.html" rel="nofollow" data-i18n-index="read_more">Read
+                            More</a>
                     </div>
                     <div class="clear"> </div>
                 </div>
@@ -197,152 +340,20 @@ Shijiazhuang Huaneng Electric Power Fitting Co. Ltd. specially manufactures pref
                 <!-- index-probox start -->
                 <div class="index-probox">
                     <div class="index-item">
-                        <p class="item-title wow fadeInLeft"><a href="products.html" title="Our Products">Our
+                        <p class="item-title wow fadeInLeft"><a href="products.html" title="Our Products"
+                                data-i18n-index="products_title">Our
                                 Products</a></p>
-                        <p class="item-desc wow fadeInLeft"><a href="products.html">
+                        <p class="item-desc wow fadeInLeft"><a href="products.html" data-i18n-index="products_content">
                                 我们公司专业生产和销售电力行业相关产品，包括电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等。所有产品均采用优质原材料和精湛工艺制造，性能稳定，种类齐全，支持来图来样加工定制，满足多样化需求。无论是结构强度、精度要求还是使用寿命，均符合行业标准，深受客户信赖。我们以快速发货、严格质控和优良售后服务，为客户提供高性价比的产品解决方案。...</a>
                         </p>
-                        <a href="products.html" class="item-btn wow fadeInRight" rel="nofollow">More +</a>
+                        <a href="products.html" class="item-btn wow fadeInRight" rel="nofollow"
+                            data-i18n-index="more">More +</a>
                     </div>
 
+                    <ul class="box-list" id="goods-list"></ul>
 
-                    <!-- <ul class="box-list" id="product-box-list">
-                    </ul> -->
-
-                    <ul class="box-list">
-                        <li class="list-item no_marginl wow fadeInUp" data-wow-delay="000ms">
-                            <div class="item-pic scale-big an-bd5"> <a href="products/detail.html"
-                                    title="ADSS Preformed Suspension Clamp"><img class="nlazy"
-                                        data-original="https://cbu01.alicdn.com/img/ibank/O1CN019Ro3oM1xAd11ap1cU_!!2209741426403-0-cib.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_375,w_375,color_FFFFFF"></a>
-                                <a href="products/detail.html" class="item-backdrop"><i
-                                        class="iconfont icon-lianjie"></i></a>
-                            </div>
-                            <div class="item-body">
-                                <p class="item-title"> <a class="self-ellipsis" href="products/detail.html">钢绞线</a> </p>
-                                <a href="products/detail.html" class="item-btn" rel="nofollow"><img
-                                        src="themes/template/0614/static/images/web1.png"></a>
-                            </div>
-                        </li>
-
-                        <li class="list-item  wow fadeInUp" data-wow-delay="200ms">
-                            <div class="item-pic scale-big an-bd5"> <a href="products/detail.html"
-                                    title="ADSS Preformed Short Span Tension Clamp"><img class="nlazy"
-                                        data-original="https://cbu01.alicdn.com/img/ibank/O1CN01VBTMRK1xAd0wCV9HU_!!2209741426403-0-cib.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_375,w_375,color_FFFFFF"></a>
-                                <a href="products/detail.html" class="item-backdrop"><i
-                                        class="iconfont icon-lianjie"></i></a>
-                            </div>
-                            <div class="item-body">
-                                <p class="item-title"> <a class="self-ellipsis" href="products/detail.html">光缆拉线夹</a>
-                                </p>
-                                <a href="products/detail.html" class="item-btn" rel="nofollow"><img
-                                        src="themes/template/0614/static/images/web1.png"></a>
-                            </div>
-                        </li>
-
-                        <li class="list-item  wow fadeInUp" data-wow-delay="400ms">
-                            <div class="item-pic scale-big an-bd5"> <a href="products/detail.html"
-                                    title="ADSS with ANZ Preformed Tension Clamp"><img class="nlazy"
-                                        data-original="https://cbu01.alicdn.com/img/ibank/O1CN01W9Jqte1xAd13fPJFk_!!2209741426403-0-cib.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_375,w_375,color_FFFFFF"></a>
-                                <a href="products/detail.html" class="item-backdrop"><i
-                                        class="iconfont icon-lianjie"></i></a>
-                            </div>
-                            <div class="item-body">
-                                <p class="item-title"> <a class="self-ellipsis" href="products/detail.html">镀锌夹板</a>
-                                </p>
-                                <a href="products/detail.html" class="item-btn" rel="nofollow"><img
-                                        src="themes/template/0614/static/images/web1.png"></a>
-                            </div>
-                        </li>
-
-                        <li class="list-item no_marginl wow fadeInUp" data-wow-delay="600ms">
-                            <div class="item-pic scale-big an-bd5"> <a href="products/detail.html"
-                                    title="ADSS with The DN Short-span Tension Clamp"><img class="nlazy"
-                                        data-original="https://cbu01.alicdn.com/img/ibank/O1CN01I6deyJ1xAd169I9hG_!!2209741426403-0-cib.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_375,w_375,color_FFFFFF"></a>
-                                <a href="products/detail.html" class="item-backdrop"><i
-                                        class="iconfont icon-lianjie"></i></a>
-                            </div>
-                            <div class="item-body">
-                                <p class="item-title"> <a class="self-ellipsis" href="products/detail.html">激光切割铁制品
-                                        Short-span Tension Clamp</a> </p>
-                                <a href="products/detail.html" class="item-btn" rel="nofollow"><img
-                                        src="themes/template/0614/static/images/web1.png"></a>
-                            </div>
-                        </li>
-
-                        <li class="list-item  wow fadeInUp" data-wow-delay="800ms">
-                            <div class="item-pic scale-big an-bd5"> <a href="products/detail.html"
-                                    title="Spiral Vibration Damper"><img class="nlazy"
-                                        data-original="https://cbu01.alicdn.com/img/ibank/O1CN01BOnjO41xAd11XqPdn_!!2209741426403-0-cib.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_375,w_375,color_FFFFFF"
-                                        title="FL Spiral Vibration Damper" alt="FL Spiral Vibration Damper"></a>
-                                <a href="products/detail.html" class="item-backdrop"><i
-                                        class="iconfont icon-lianjie"></i></a>
-                            </div>
-                            <div class="item-body">
-                                <p class="item-title"> <a class="self-ellipsis" href="products/detail.html">激光切割铁制品</a>
-                                </p>
-                                <a href="products/detail.html" class="item-btn" rel="nofollow"><img
-                                        src="themes/template/0614/static/images/web1.png"></a>
-                            </div>
-                        </li>
-
-                        <li class="list-item  wow fadeInUp" data-wow-delay="1000ms">
-                            <div class="item-pic scale-big an-bd5"> <a href="products/detail.html"
-                                    title="FYH  Anti-corona Ring"><img class="nlazy"
-                                        data-original="https://cbu01.alicdn.com/img/ibank/O1CN01kOGjL81xAd11XH5xp_!!2209741426403-0-cib.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_375,w_375,color_FFFFFF"
-                                        title="FYH  Anti-corona Ring" alt="FYH  Anti-corona Ring"></a>
-                                <a href="products/detail.html" class="item-backdrop"><i
-                                        class="iconfont icon-lianjie"></i></a>
-                            </div>
-                            <div class="item-body">
-                                <p class="item-title"> <a class="self-ellipsis" href="products/detail.html">拉线地锚</a>
-                                </p>
-                                <a href="products/detail.html" class="item-btn" rel="nofollow"><img
-                                        src="themes/template/0614/static/images/web1.png"></a>
-                            </div>
-                        </li>
-
-                    </ul>
                 </div>
 
-                <!-- index-contact start -->
-                <!-- <div class="index-contact">
-                    <div class="item-wrap"
-                        style="background: url(https://s21.ax1x.com/2024/11/21/pAWXrpn.jpg) no-repeat center;">
-                        <div class="item-box">
-                            <p class="item-title"><a href="contact-us.html" title="Contact Us">Contact Us</a></p>
-                            <p class="item-desc"><a href="contact-us.html"
-                                    title="We're here to help you with your questions about our products, and we've made it easy and convenient for you to reach us.">We're
-                                    here to help you with your questions about our products, and we've made it easy and
-                                    convenient for you to reach us.</a></p>
-                            <form action="https://www.huanengfitting.com/index/inquiry/inquirypost/source/3.html">
-                                <div class="box-form fix">
-                                    <div class="item-input star"> <input type="text" name="name" placeholder="Name" />
-                                    </div>
-                                    <div class="item-input "> <input type="text" name="phone" placeholder="Tel." />
-                                    </div>
-                                    <div class="item-input star"> <input type="text" name="email"
-                                            placeholder="E-mail" /> </div>
-                                    <div class="item-input"> <input type="text" name="country" placeholder="Country" />
-                                    </div>
-
-                                    <div class="item-textarea pull-left star"> <textarea name="content"
-                                            placeholder="Message"></textarea> </div>
-
-                                    <div class="item-code pull-left star"> <input type="text" name="code"
-                                            placeholder="CAPTCHA" class="code-input" />
-                                        <div class="code-img"> <img src="index/common/verify/id/13.png"
-                                                class="refresh-inquiry-code "
-                                                onclick="this.src='index/common/verify/id/13d41d.png?'+Math.random()">
-                                        </div> <input type="button" onclick="subBottomInquiry(this)" value="Submit"
-                                            class="code-btn" />
-                                        <div class="clear"></div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- index-contact end -->
             </div>
         </div>
 
@@ -351,31 +362,34 @@ Shijiazhuang Huaneng Electric Power Fitting Co. Ltd. specially manufactures pref
 
                 <div class="f-top">
                     <div class="flist1 pull-left flist">
-                        <p class="footer-title">Navigation</p>
+                        <p class="footer-title" data-i18n-footer="navigation">Navigation</p>
                         <ul class="box-list">
-                            <li><a href="index.html" title="Home">Home</a></li>
-                            <li><a href="about-us.html" title="About Us">About Us</a></li>
-                            <li><a href="products.html" title="Products">Products</a></li>
-                            <li><a href="contact-us.html" title="Contact Us">Contact Us</a></li>
+                            <li><a href="index.html" title="Home" data-i18n-nav="home">Home</a></li>
+                            <li><a href="about-us.html" title="About Us" data-i18n-nav="about">About Us</a></li>
+                            <li><a href="products.html" title="Products" data-i18n-nav="products">Products</a></li>
+                            <li><a href="contact-us.html" title="Contact Us" data-i18n-nav="contact">Contact Us</a></li>
                         </ul>
                     </div>
 
                     <div class="flist2 pull-left flist">
-                        <p class="footer-title">Contact Us</p>
+                        <p class="footer-title" data-i18n-footer="contactUs">Contact Us</p>
                         <ul class="box-list">
-                            <li>E-mail: <a href="mailto:527276908@qq.com"><span
-                                        style="display:inline-block; direction:ltr">527276908@qq.com</span></a>
+                            <li><span data-i18n-contact="email">E-mail</span>: <a
+                                    href="mailto:zhenguanhebei@gmail.com"><span
+                                        style="display:inline-block; direction:ltr">zhenguanhebei@gmail.com</span></a>
                             </li>
-                            <li>Mobile: <span style="display:inline-block; direction:ltr">+86 157 3377 6606</span></li>
-                            <li>Tel.: <span style="display:inline-block; direction:ltr">+86 0317 22085743</span></li>
-                            <li>WeChat: <span style="display:inline-block; direction:ltr">Lxd527276908</span></li>
+                            <li>WhatApps: <span style="display:inline-block; direction:ltr">+86 157 3377 6606</span>
+                            </li>
+                            <li><span data-i18n-contact="wechat">E-mail</span>: <span
+                                    style="display:inline-block; direction:ltr">15733776606</span></li>
+                            <li>Facebook: <span style="display:inline-block; direction:ltr">Xiangdong Li</span></li>
                         </ul>
                     </div>
                     <div class="flist3 pull-left flist">
-                        <p class="footer-title">Address</p>
+                        <p class="footer-title" data-i18n-footer="address">Address</p>
                         <ul class="box-list">
-                            <li>地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧</li>
-                            <li>成立时间：2020年11月11日</li>
+                            <li data-i18n-contact="companyAddress">North of Fiscal Bureau...</li>
+                            <li data-i18n-contact="founded">Established: 2020-11-11</li>
                         </ul>
                     </div>
 
@@ -497,578 +511,414 @@ Shijiazhuang Huaneng Electric Power Fitting Co. Ltd. specially manufactures pref
 
 
     <script>
-        // 保存 JSON 数据到 localStorage
-        const jsonData = {
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     fetch("https://perhapsdone.github.io/data.json")
+        //         .then(response => response.json())
+        //         .then(data => console.log(data))
+        //         .catch(error => console.error("Error fetching JSON:", error));
+        // });
+
+        const data =
+        {
             "goods": [
                 {
                     "goodId": 1,
-                    "title": "智能手机 X100",
-                    "content": "智能手机 X100 配备 6.5 英寸 AMOLED 屏幕，搭载最新处理器，支持 5G 网络，配备 128GB 存储空间和 64MP 后置相机，适合喜欢拍照和玩游戏的用户。",
-                    "image": "https://via.placeholder.com/160?text=智能手机+X100"
+                    "name": "C型拉勾",
+                    "name_en": "C-shaped hook",
+                    "desc": "C型拉钩通常由金属制成，如钢铁或不锈钢。 根据需要，它们可以有不同的尺寸和重量承载能力。",
+                    "desc_en": "C-type hooks are typically fabricated from metal, such as steel or stainless steel. Depending on the specific requirements, they can come in various sizes and possess different weight-carrying capacities.",
+                    "content": "C型拉钩，又称为C型挂钩或C型吊钩，是一种常用的工具，通常用于悬挂和固定物品。 它的外形呈”C”字型，因而得名。 C型拉钩通常由金属制成，如钢铁或不锈钢。 根据需要，它们可以有不同的尺寸和重量承载能力。",
+                    "content_en": "The C - shaped hook, alternatively referred to as the C - type hook or C - shaped lifting hook, is a prevalent tool frequently utilized for the purpose of suspending and securing objects. Its name is derived from its distinct ' C ' - shaped configuration. Manufactured predominantly from metals like steel or stainless steel, C - shaped hooks are available in a diverse range of sizes. Moreover, their weight - bearing capacities are tailored to meet specific demands.",
+                    "icon": "https://perhapsdone.github.io/images/1/1.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/1/detail/1.1.png",
+                        "https://perhapsdone.github.io/images/1/detail/1.2.png",
+                        "https://perhapsdone.github.io/images/1/detail/1.3.png"]
                 },
                 {
                     "goodId": 2,
-                    "title": "蓝牙耳机 Y200",
-                    "content": "蓝牙耳机 Y200 提供高品质音效，支持降噪功能，适合通话和音乐播放。配有便捷的充电盒，续航长达 8 小时，舒适的佩戴感受。",
-                    "image": "https://via.placeholder.com/160?text=蓝牙耳机+Y200"
+                    "name": "D型铁",
+                    "name_en": "D-type iron",
+                    "desc": "电力D型拉钩是电力施工和维护中的重要工具，具有操作简便、安全可靠等优点，广泛应用于导线拉紧、电缆固定等任务。",
+                    "desc_en": "The D-type pulling hook is an essential tool in power construction and maintenance, known for its ease of operation, safety, and reliability. It is widely used for tasks such as tightening conductors and securing cables.",
+                    "content": "电力D型铁D-type呈现出D形的截面形态，这种设计使得其在电力系统中能够提供稳定的支撑和连接作用。其结构通常包括铁芯、连接部件和可能的保护涂层等。铁芯部分主要由优质钢材制成，具有良好的强度和耐腐蚀性。连接部件则用于将D型铁与其他电力组件或结构进行连接，确保其稳定性和可靠性.",
+                    "content_en": "The D-type of electric D-type iron presents a D-shaped cross-sectional shape, which enables it to provide stable support and connection in the power system. Its structure usually includes an iron core, connecting components, and possible protective coatings. The iron core is mainly made of high-quality steel, which has good strength and corrosion resistance. The connecting components are used to connect D-type iron with other electrical components or structures, ensuring their stability and reliability.",
+                    "icon": "https://perhapsdone.github.io/images/2/2.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/2/detail/2.1.png",
+                        "https://perhapsdone.github.io/images/2/detail/2.2.png",
+                        "https://perhapsdone.github.io/images/2/detail/2.3.png"]
                 },
                 {
                     "goodId": 3,
-                    "title": "4K 智能电视 Z300",
-                    "content": "4K 智能电视 Z300 支持 HDR 技术，画质清晰细腻，内置多种流媒体应用。大屏幕设计带来影院般的观看体验，适合家庭娱乐。",
-                    "image": "https://via.placeholder.com/160?text=4K+智能电视+Z300"
+                    "name": "扁铁抱箍",
+                    "name_en": "Flat iron hoop clamp",
+                    "desc": "它可以是简单的圆形抱箍，用于环抱圆形的杆件，如电线杆、管道等；也可以是异形抱箍，根据被固定物体的特殊形状进行定制。",
+                    "desc_en": "C-type hooks are typically fabricated from metal, such as steel or stainless steel. Depending on the specific requirements, they can come in various sizes and possess different weight-carrying capacities.",
+                    "content": "扁铁抱箍一般采用碳钢材质，其中普通碳素钢是最常见的材质，具有一定的强度和韧性，价格相对较低，适用于一般的固定场合。但耐腐蚀性较差，在潮湿或腐蚀性环境中容易生锈。为了提升性能，有时也会采用优质碳素钢，其含碳量和杂质含量较低，具有更好的强度、韧性。",
+                    "content_en": "Flat iron clamps are generally made of carbon steel, among which ordinary carbon steel is the most common material, with certain strength and toughness, relatively low price, and suitable for general fixing occasions. But it has poor corrosion resistance and is prone to rusting in humid or corrosive environments. In order to improve performance, high-quality carbon steel is sometimes used, which has lower carbon and impurity content and better strength and toughness.",
+                    "icon": "https://perhapsdone.github.io/images/3/3.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/3/detail/3.1.png",
+                        "https://perhapsdone.github.io/images/3/detail/3.2.png",
+                        "https://perhapsdone.github.io/images/3/detail/3.3.png"]
                 },
                 {
                     "goodId": 4,
-                    "title": "智能手表 W400",
-                    "content": "智能手表 W400 提供心率监测、睡眠跟踪、运动模式等多项健康功能，搭载 AMOLED 屏幕，拥有 14 天超长电池续航，是日常健身和健康管理的好帮手。",
-                    "image": "https://via.placeholder.com/160?text=智能手表+W400"
+                    "name": "电杆抱箍",
+                    "name_en": "Pole hoop clamp",
+                    "desc": "抱箍在电线杆上固定设备、调高度、便安装维护，材质有铸铁、钢制、塑料，用途分电力、通信，形状有圆、方，为电力通信提供坚实保障。",
+                    "desc_en": "The clamp is utilized for fixing equipment onto telegraph poles, adjusting the height, and facilitating installation and maintenance. It is made of various materials including cast iron, steel, and plastic. According to its applications, it can be categorized into electrical and communication types. Its shape can be circular or square, and it offers a solid guarantee for the power and communication sectors.",
+                    "content": "电杆抱箍的材质多样，常见的有钢材、铸铁以及复合材料等。钢材抱箍强度高、耐磨损、耐腐蚀，且可塑性好，易于制造加工；铸铁抱箍重量较重，但承载能力好，经久耐用，适用于大型电力线路工程中；复合材料抱箍，如玻璃钢材质，具有重量轻、强度高、耐腐蚀等特点，且不导电，可以减小电弧的影响，安装也更为简便。",
+                    "content_en": "The materials of pole clamps are diverse, commonly including steel, cast iron, and composite materials. Steel hoops have high strength, wear resistance, corrosion resistance, and good plasticity, making them easy to manufacture and process; Cast iron clamps are heavy in weight, but have good load-bearing capacity and durability, making them suitable for large-scale power line projects; Composite material clamps, such as fiberglass material, have the characteristics of light weight, high strength, corrosion resistance, and are non-conductive, which can reduce the impact of electric arcs and make installation easier.",
+                    "icon": "https://perhapsdone.github.io/images/4/4.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/4/detail/4.1.png",
+                        "https://perhapsdone.github.io/images/4/detail/4.2.png",
+                        "https://perhapsdone.github.io/images/4/detail/4.3.png",
+                        "https://perhapsdone.github.io/images/4/detail/4.4.png"]
                 },
                 {
                     "goodId": 5,
-                    "title": "无线吸尘器 V500",
-                    "content": "无线吸尘器 V500 拥有强大吸力，适用于各种地面。配备多种吸头，能够轻松清洁家中的每个角落，长时间续航，使用便捷，适合家庭清洁。",
-                    "image": "https://via.placeholder.com/160?text=无线吸尘器+V500"
+                    "name": "电缆支架",
+                    "name_en": "Cable bracket",
+                    "desc": "电缆敷设在电缆沟和隧道内，一般多使用支架固定。常用的支架有角钢支架和装配式支架。",
+                    "desc_en": "Cables are typically fixed by supports when laid in cable trenches and tunnels. Commonly used supports include angle steel supports and prefabricated ones.",
+                    "content": "电缆支架通常由金属（如钢、铝合金等）或复合材料（如玻璃钢）制成。金属支架具有较高的强度和耐久性，能够承受较大的荷载；而复合材料支架则具有轻质、耐腐蚀、绝缘性能好等优点。电缆支架的构造多样，包括角铁支架、玻璃钢支架、H型支架等，每种支架都有其特定的应用场景和优势。",
+                    "content_en": "Cable supports are usually made of metal (such as steel, aluminum alloy, etc.) or composite materials (such as fiberglass). Metal brackets have high strength and durability, and can withstand large loads; Composite material supports have advantages such as lightweight, corrosion resistance, and good insulation performance. The construction of cable supports is diverse, including angle iron supports, fiberglass supports, H-shaped supports, etc. Each type of support has its specific application scenarios and advantages.",
+                    "icon": "https://perhapsdone.github.io/images/5/5.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/5/detail/5.1.png"]
                 },
                 {
                     "goodId": 6,
-                    "title": "电动牙刷 U600",
-                    "content": "电动牙刷 U600 采用高频震动技术，清洁效果更好，有多种刷牙模式，帮助去除牙垢、保持口腔健康，带有智能计时功能，确保每次刷牙时长适宜。",
-                    "image": "https://via.placeholder.com/160?text=电动牙刷+U600"
+                    "name": "电力横担",
+                    "name_en": "Power cross arm",
+                    "desc": "横担是杆塔中重要的组成部分，它的作用是用来安装绝缘子及金具，以支承导线、避雷线，并使之按规定保持一定的安全距离。",
+                    "desc_en": "The cross arm is an important component of the tower. Its function is to install insulators and fittings, thereby supporting conductors and lightning conductors and maintaining a certain safe distance between them as required.",
+                    "content": "电力横担，通常安装在电线杆或塔架的顶部，是一种横向固定的结构件，用于支撑导线、绝缘子以及相关的金具和设备。",
+                    "content_en": "Electric cross arm, usually installed at the top of power poles or towers, is a horizontally fixed structural component used to support wires, insulators, and related fittings and equipment.",
+                    "icon": "https://perhapsdone.github.io/images/6/6.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/6/detail/6.1.png"]
                 },
                 {
                     "goodId": 7,
-                    "title": "空气净化器 T700",
-                    "content": "空气净化器 T700 配备 HEPA 过滤网，有效去除空气中的尘土、花粉和细菌，改善室内空气质量，适合家居、办公室使用，保持空气清新。",
-                    "image": "https://via.placeholder.com/160?text=空气净化器+T700"
+                    "name": "钢绞线",
+                    "name_en": "Zinc-Aluminum Coated Steel  Strands",
+                    "desc": "镀锌钢绞线通常指用于承力索、拉线、加强芯等，也可以作为架空输电的地线、公路两边的阻拦索或建筑结构中的结构索。",
+                    "desc_en": "Galvanized steel strand is commonly used for messenger wires, guy wires, strengthening cores, and the like. It can also function as the ground wire for overhead power transmission, the barrier cable on both sides of highways, or the structural cable in building structures.",
+                    "content": "钢绞线根据用途和涂层的不同，可以分为多种类型。其中，镀锌钢绞线在电力领域尤为常见，它通常被用作承力索、拉线、加强芯等，也可以作为架空输电的地线、公路两边的阻拦索或建筑结构中的结构索。",
+                    "content_en": "Steel strands can be divided into various types according to different uses and coatings. Among them, galvanized steel strands are particularly common in the power industry. They are commonly used as messenger wires, guy wires, and strengthening cores. They can also serve as overhead transmission ground wires, barrier cables on both sides of highways, or structural cables in building structures.",
+                    "icon": "https://perhapsdone.github.io/images/7/7.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/7/detail/7.1.png"]
                 },
                 {
                     "goodId": 8,
-                    "title": "智能冰箱 S800",
-                    "content": "智能冰箱 S800 配有智能温控系统，保持食物的新鲜度。通过手机 APP 控制温度和湿度，具有节能功能，适合家庭使用。",
-                    "image": "https://via.placeholder.com/160?text=智能冰箱+S800"
+                    "name": "钢绞线卡子",
+                    "name_en": "guy clip for Zinc-Aluminum Coated Steel  Strands",
+                    "desc": "钢线卡子是用来锁住钢丝绳的小型工具，起到固定、连接和保护作用，在电网建设中有重要作用。",
+                    "desc_en": "Steel wire clips are small tools used for locking steel wire ropes. They serve the functions of fixing, connecting, and protecting, and play an important role in power grid construction. ",
+                    "content": "钢绞线卡子通常采用优质钢材制作，具有高强度和良好的韧性。这使得它能够承受较大的拉力，不易因外力作用而变形或损坏，从而确保了连接的稳定性。在构造上，钢绞线卡子设计精巧，形状和尺寸多样，可根据不同规格的钢绞线进行适配。此外，新型钢绞线卡子还采用了带V型爪的底座设计，增加了连接件与卡头之间的接触点，提高了夹紧力，解决了现有技术中连接件在卡头内夹紧时受力点单一、夹紧力不足导致连接脱落的问题。",
+                    "content_en": "Steel strand clamps are usually made of high-quality steel, which has high strength and good toughness. This enables it to withstand high tensile forces and is not easily deformed or damaged by external forces, thereby ensuring the stability of the connection. In terms of construction, the steel strand clamp is exquisitely designed with diverse shapes and sizes, and can be adapted to different specifications of steel strands. In addition, the new steel strand clamp also adopts a base design with V-shaped claws, which increases the contact point between the connecting piece and the clamp head, improves the clamping force, and solves the problem of single force point and insufficient clamping force causing connection detachment when the connecting piece is clamped inside the clamp head in the existing technology.",
+                    "icon": "https://perhapsdone.github.io/images/8/8.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/8/detail/8.1.png"]
                 },
                 {
                     "goodId": 9,
-                    "title": "运动耳机 R900",
-                    "content": "运动耳机 R900 防水防汗，设计符合人体工程学，提供高质量音效和深度低音，适合跑步、健身等活动，长时间佩戴不会不适。",
-                    "image": "https://via.placeholder.com/160?text=运动耳机+R900"
+                    "name": "光缆拉线夹",
+                    "name_en": "Optical cable guy clip",
+                    "desc": "线夹是能固定在导线上的铁制或铝制金属附件，大部分在运行中需要承受较大的拉力，有的还要同时保证电气方面接触良好。",
+                    "desc_en": "A wire clamp is an iron or aluminum metal accessory that can be fixed onto a conducting wire. Most of them need to withstand considerable tensile forces during operation, and some also need to ensure good electrical contact simultaneously. .",
+                    "content": "光缆拉线夹的种类繁多，根据应用场景、光缆类型、固定方式等因素的不同，可以选择不同种类的光缆拉线夹。例如，对于ADSS（全介质自承式）光缆，通常会选择具有预绞丝结构的耐张线夹，这种线夹能够更好地适应光缆的直径和形状，提供更可靠的固定效果。在选择光缆拉线夹时，需要考虑光缆的直径、长度、重量以及安装环境等因素，以确保选择的线夹能够满足实际需求。",
+                    "content_en": "There are various types of cable clamps, and different types of cable clamps can be selected based on different application scenarios, cable types, fixing methods, and other factors. For example, for ADSS (all dielectric self-supporting) optical cables, tension clamps with pre twisted wire structures are usually chosen, which can better adapt to the diameter and shape of the cable and provide more reliable fixing effects. When selecting cable clamps, it is necessary to consider factors such as the diameter, length, weight, and installation environment of the cable to ensure that the selected clamp can meet actual needs..",
+                    "icon": "https://perhapsdone.github.io/images/9/9.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/9/detail/9.1.png",
+                        "https://perhapsdone.github.io/images/9/detail/9.2.png",
+                        "https://perhapsdone.github.io/images/9/detail/9.3.png",
+                        "https://perhapsdone.github.io/images/9/detail/9.4.png"]
                 },
                 {
                     "goodId": 10,
-                    "title": "便携投影仪 Q1000",
-                    "content": "便携投影仪 Q1000 提供高清投影，支持无线连接，可以随时随地进行电影播放或商务演示，轻巧便携，适合外出旅行使用。",
-                    "image": "https://via.placeholder.com/160?text=便携投影仪+Q1000"
+                    "name": "光缆连接线夹",
+                    "name_en": "Optical Cable Connecting Clamp",
+                    "desc": "线夹是能固定在导线上的铁制或铝制金属附件，大部分在运行中需要承受较大的拉力，有的还要同时保证电气方面接触。",
+                    "desc_en": "A wire clamp is an iron or aluminum metal accessory that can be fixed onto a conducting wire. Most of them need to withstand considerable tensile forces during operation, and some also need to ensure good electrical contact simultaneously.",
+                    "content": "光缆连接线夹广泛应用于各种光缆线路中，如ADSS光缆线路、OPGW光缆线路等。在电力、通信、广播、电视等领域中，光缆连接线夹都发挥着重要作用。",
+                    "content_en": "Fiber optic cable connectors are widely used in various fiber optic cable lines, such as ADSS fiber optic cable lines, OPGW fiber optic cable lines, etc. Fiber optic cable connectors play an important role in fields such as power, communication, broadcasting, and television.",
+                    "icon": "https://perhapsdone.github.io/images/10/10.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/10/detail/10.1.png",
+                        "https://perhapsdone.github.io/images/10/detail/10.2.png",
+                        "https://perhapsdone.github.io/images/10/detail/10.3.png"]
                 },
                 {
                     "goodId": 11,
-                    "title": "电动滑板车 P1100",
-                    "content": "电动滑板车 P1100 适合城市通勤，最高时速可达 25km/h，轻便耐用，支持长时间续航，折叠设计，方便存放和携带。",
-                    "image": "https://via.placeholder.com/160?text=电动滑板车+P1100"
+                    "name": "光纤金具",
+                    "name_en": "Optical - fiber Fittings",
+                    "desc": "电力光纤金具是用于电力系统中光纤复合架空地线（OPGW）或全介质自承式光缆（ADSS）安装和固定的专用金具。它们的主要作用是确保光纤电缆在电力线路中的安全、稳定运行，同时保护光纤免受机械损伤和环境因素的影响。",
+                    "desc_en": "Fiber optic fittings for power systems are specialized hardware used for the installation and securing of optical fiber composite overhead ground wires (OPGW) or all-dielectric self-supporting optical cables (ADSS) in power systems. Their primary role is to ensure the safe and stable operation of fiber optic cables within power lines, while protecting the fibers from mechanical damage and environmental factors.",
+                    "content": "电力光纤金具能够牢固地将光纤光缆固定在电力杆塔、电缆桥架或其他支撑结构上，确保光缆在风、雨、雪等恶劣天气条件下不会松动或脱落。金具设计有缓冲和减震机制，能够减少光缆在振动或外力作用下的损伤，材质上通常采用耐腐蚀、耐磨损的材料，如不锈钢、铝合金等，以提高金具的耐用性和使用寿命。",
+                    "content_en": "Power fiber optic fittings can firmly fix fiber optic cables to power towers, cable trays, or other supporting structures, ensuring that the cables will not loosen or fall off in adverse weather conditions such as wind, rain, and snow. The hardware design has buffering and shock-absorbing mechanisms, which can reduce damage to the optical cable under vibration or external forces. Materials that are corrosion-resistant and wear-resistant, such as stainless steel and aluminum alloy, are usually used to improve the durability and service life of the fittings..",
+                    "icon": "https://perhapsdone.github.io/images/11/11.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/11/detail/11.1.png",
+                        "https://perhapsdone.github.io/images/11/detail/11.2.png",
+                        "https://perhapsdone.github.io/images/11/detail/11.3.png",
+                        "https://perhapsdone.github.io/images/11/detail/11.4.png"]
                 },
                 {
                     "goodId": 12,
-                    "title": "高压蒸汽熨斗 O1200",
-                    "content": "高压蒸汽熨斗 O1200 提供强力蒸汽，帮助快速去除衣物上的褶皱，温控系统自动调节，安全且高效，适合家庭使用。",
-                    "image": "https://via.placeholder.com/160?text=高压蒸汽熨斗+O1200"
+                    "name": "花篮螺丝",
+                    "name_en": "turn buckle",
+                    "desc": "花篮螺栓利用丝杠进行伸缩，能调整钢丝绳的松紧。可在构件运输中捆绑构件，在安装校正中松。",
+                    "desc_en": "The turnbuckle operates through the expansion and contraction of a lead screw, enabling it to adjust the tension of the wire rope. It can be utilized to bind components during the transportation of components and to loosen them during installation and alignment processes.",
+                    "content": "花篮螺丝根据工艺成型方式的不同，主要分为铸造玛钢、普通碳钢和锻制三种。目前市场上主要为普通碳钢和锻制两种。此外，花篮螺丝还分为开体花篮和闭体花篮，开体花篮的体态是张开的，而闭体花篮则是封闭的。根据使用场合的不同，花篮螺丝还有不同的型号，如OO型、CC型和CO型。OO型适用于不经常拆卸的场合，CC型适用于经常拆卸的场合，而CO型则适用于一端经常拆卸另一端不经常拆卸的场合。",
+                    "content_en": "Flower basket screws are mainly divided into three types according to different forming methods: cast Ma steel, ordinary carbon steel, and forged. At present, there are mainly two types on the market: ordinary carbon steel and forged steel. In addition, flower basket screws are divided into open flower baskets and closed flower baskets. The open flower basket has an open body, while the closed flower basket is closed. According to different usage scenarios, there are different models of flower basket screws, such as OO type, CC type, and CO type. The OO type is suitable for situations where disassembly is not frequent, the CC type is suitable for situations where disassembly is frequent, and the CO type is suitable for situations where one end is frequently disassembled and the other end is not frequently disassembled.",
+                    "icon": "https://perhapsdone.github.io/images/12/12.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/12/detail/12.1.png"]
                 },
                 {
                     "goodId": 13,
-                    "title": "智能门锁 N1300",
-                    "content": "智能门锁 N1300 配有指纹识别、密码输入和远程控制功能，保障家庭安全。支持临时密码和临时远程解锁功能，智能便捷。",
-                    "image": "https://via.placeholder.com/160?text=智能门锁+N1300"
+                    "name": "接地棒线夹",
+                    "name_en": "Grounding Rod Wire Clamp",
+                    "desc": "电力接地棒线夹是一种用于电力线路中连接和固定导线的金具，主要用于实现导线的电气连接和机械支撑。它通常用于架空输电线路、配电线路以及电气设备的安装和维护中，确保导线连接的可靠性和稳定性。",
+                    "desc_en": "The power grounding rod clamp is a kind of fitting used for connecting and fixing conductors in the power line, mainly used to achieve the electrical connection and mechanical support of the conductors. It is usually applied in the installation and maintenance of overhead transmission lines, distribution lines, and electrical equipment to ensure the reliability and stability of the conductor connections.",
+                    "content": "电力接地棒线夹通常由高强度、耐腐蚀的金属材料制成，如铜、铝或不锈钢等。其结构设计紧凑，便于安装和维护。线夹内部可能包含穿刺刀片、密封垫、防水硅脂等组件，以增强连接的可靠性和防水性能。此外，线夹还可能配备高强度螺栓和力矩螺母等紧固件，以确保连接的牢固性。",
+                    "content_en": "The power grounding rod clamp is usually made of high-strength, corrosion-resistant metal materials such as copper, aluminum, or stainless steel. Its structural design is compact, easy to install and maintain. The internal components of the cable clamp may include puncture blades, sealing gaskets, waterproof silicone grease, etc., to enhance the reliability and waterproof performance of the connection. In addition, the wire clamp may also be equipped with high-strength bolts and torque nuts and other fasteners to ensure the firmness of the connection.",
+                    "icon": "https://perhapsdone.github.io/images/13/13.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/13/detail/13.1.png",
+                        "https://perhapsdone.github.io/images/13/detail/13.2.png",
+                        "https://perhapsdone.github.io/images/13/detail/13.3.png"]
                 },
                 {
                     "goodId": 14,
-                    "title": "智能家居控制器 M1400",
-                    "content": "智能家居控制器 M1400 可以控制家庭中的智能设备，支持语音识别与远程操控。兼容多种家居平台，提升生活便利性。",
-                    "image": "https://via.placeholder.com/160?text=智能家居控制器+M1400"
+                    "name": "拉线地锚",
+                    "name_en": "Guy Anchor",
+                    "desc": "拉线地锚,是线路转角,终端等处用来平衡导线拉力的重要设施,它直接影响着线路的安全。",
+                    "desc_en": "The guy anchor is a crucial facility that is utilized at line corners, terminals, and other locations to balance the tensile force of conductors. It has a direct impact on the safety of the line.",
+                    "content": "拉线地锚通常由地锚本体、锚杆、锚绳和张紧器等部分组成。地锚本体：是锚定拉线的主体部分，通常由高强度、耐腐蚀的钢制材料制成。锚杆：连接地锚本体和拉线的钢管，通过扭转张力杆，锚杆可以与地面产生摩擦力，从而稳固地固定在地面上。锚绳：连接锚杆和拉线的钢绳，可以根据需要选择不同规格的钢绳。张紧器：用于调节锚绳张力的装置，通常采用螺旋式或液压式，确保锚绳保持适当的张力。",
+                    "content_en": "A cable anchor usually consists of the anchor body, anchor rod, anchor rope, and tensioner. Anchor body: It is the main part of the anchor cable, usually made of high-strength and corrosion-resistant steel materials. Anchor rod: a steel pipe that connects the anchor body and the cable. By twisting the tension rod, the anchor rod can generate friction with the ground, thereby firmly fixing it on the ground. Anchor rope: a steel rope that connects anchor rods and guy wires, and different specifications of steel ropes can be selected according to needs. Tensioner: A device used to adjust the tension of an anchor rope, usually using a spiral or hydraulic type, to ensure that the anchor rope maintains appropriate tension.",
+                    "icon": "https://perhapsdone.github.io/images/14/14.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/14/detail/14.1.png"]
                 },
                 {
                     "goodId": 15,
-                    "title": "电动摩托车 L1500",
-                    "content": "电动摩托车 L1500 设计现代，配有强劲电池和电机，适合短途城市通勤，环保高效，续航可达 80 公里。",
-                    "image": "https://via.placeholder.com/160?text=电动摩托车+L1500"
+                    "name": "拉线环",
+                    "name_en": "C-shaped hook",
+                    "desc": "电力拉线环是一种用于电力线路施工和维护的金属连接件，主要用于固定和调整拉线（如钢绞线或钢丝绳），以确保电力杆塔、导线或其他设备的稳定性和安全性。它通常与拉线棒、拉线盘等金具配合使用，广泛应用于输电线路、配电线路以及通信线路的拉线系统中。",
+                    "desc_en": "The power guy wire thimble is a metal connector used in the construction and maintenance of power lines, primarily for securing and adjusting guy wires (such as steel strands or wire ropes) to ensure the stability and safety of power poles, conductors, or other equipment. It is typically used in conjunction with other hardware like guy rods and anchor plates, and is widely applied in the guy wire systems of transmission lines, distribution lines, and communication lines.",
+                    "content": "电力拉线环通常由不同材料制成，如铁、铜、铝以及钢等，这些材料具有良好的导电性、机械强度和耐腐蚀性。具体来说，拉环的连接稳固可靠，能够承受大的机械载荷和电流负荷，确保输电线路运行的安全可靠。此外，拉环还具有较好的防腐性能，能够延长使用寿命。",
+                    "content_en": "Power cable tie rings are usually made of different materials such as iron, copper, aluminum, and steel, which have good conductivity, mechanical strength, and corrosion resistance. Specifically, the connection of the pull ring is stable and reliable, capable of withstanding large mechanical and electrical loads, ensuring the safe and reliable operation of the transmission line. In addition, the pull ring also has good anti-corrosion performance, which can extend its service life.",
+                    "icon": "https://perhapsdone.github.io/images/15/15.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/15/detail/15.1.png",
+                        "https://perhapsdone.github.io/images/15/detail/15.2.png",
+                        "https://perhapsdone.github.io/images/15/detail/15.3.png"]
                 },
                 {
                     "goodId": 16,
-                    "title": "家用咖啡机 K1600",
-                    "content": "家用咖啡机 K1600 采用先进的咖啡萃取技术，提供浓郁的咖啡风味，支持多种咖啡制作方式，简便易用，适合家庭使用。",
-                    "image": "https://via.placeholder.com/160?text=家用咖啡机+K1600"
+                    "name": "埋线圏",
+                    "name_en": "Embedded coil",
+                    "desc": "电力埋线圈是地下电缆工程中的重要组成部分，主要用于电力传输、配电和通信信号的传输。其高安全性、美观性和可靠性使其在城市电网、隧道工程等领域得到广泛应用。正确敷设和定期维护是确保其性能的关键。",
+                    "desc_en": "The power buried cable coil is an essential component of underground cable engineering, primarily used for power transmission, distribution, and communication signal transmission. Its high safety, aesthetic appeal, and reliability make it widely applied in urban power grids, tunnel engineering, and other fields. Proper installation and regular maintenance are key to ensuring its performance.",
+                    "content": "电力埋线圈通常由导电材料（如铜、铝等）绕制而成，形成一个闭合的环路或特定的形状。为了增强线圈的机械强度和耐久性，线圈外部可能包裹有绝缘材料或保护层。根据用途不同，电力埋线圈可分为接地线圈、检测线圈等类型。根据形状和尺寸的不同，线圈可能呈现为环形、螺旋形或其他形状。",
+                    "content_en": "Electric buried coils are usually made by winding conductive materials (such as copper, aluminum, etc.) to form a closed loop or specific shape. In order to enhance the mechanical strength and durability of the coil, insulation material or protective layer may be wrapped around the outside of the coil. According to different purposes, power buried coils can be divided into grounding coils, detection coils, and other types. Depending on their shape and size, coils may appear in a circular, spiral, or other shape.",
+                    "icon": "https://perhapsdone.github.io/images/16/16.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/16/detail/16.1.png",
+                        "https://perhapsdone.github.io/images/16/detail/16.2.png",
+                        "https://perhapsdone.github.io/images/16/detail/16.3.png"]
                 },
                 {
                     "goodId": 17,
-                    "title": "厨房秤 J1700",
-                    "content": "厨房秤 J1700 提供精准测量，适合各种烹饪需求，支持多单位转换，电子显示清晰易读，帮助精准控制食材分量。",
-                    "image": "https://via.placeholder.com/160?text=厨房秤+J1700"
+                    "name": "双槽夹板",
+                    "name_en": "Double-groove splint",
+                    "desc": "双槽夹板是将线缆设备等距固定起来的零件，通过内侧的线槽是将线缆紧密卡合起来的零件，随着现在双槽夹板种类越来越多，用途越来越广。",
+                    "desc_en": "The double-groove splint is a component designed to fix cable equipment at equal intervals. The inner wire groove serves as a part capable of tightly clamping the cables. Currently, with the growing variety and expanding application of double-groove splints",
+                    "content": "双槽夹板通常由高强度、耐腐蚀的金属材料制成，如钢、铜、铝等。这些材料具有良好的机械性能和导电性能，能够确保夹板的稳定性和可靠性。夹板的槽口设计合理，能够紧密贴合线路或结构，防止其松动或脱落。",
+                    "content_en": "Double slot clamps are usually made of high-strength, corrosion-resistant metal materials such as steel, copper, aluminum, etc. These materials have good mechanical and electrical properties, which can ensure the stability and reliability of the clamping plate. The slot design of the clamp plate is reasonable and can tightly fit the circuit or structure, preventing it from loosening or falling off.",
+                    "icon": "https://perhapsdone.github.io/images/17/17.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/17/detail/17.1.png",
+                        "https://perhapsdone.github.io/images/17/detail/17.2.png"]
                 },
                 {
                     "goodId": 18,
-                    "title": "家庭影院 I1800",
-                    "content": "家庭影院 I1800 提供环绕声效果，带来身临其境的视听体验，内置高清播放器，支持多种格式，适合家庭娱乐。",
-                    "image": "https://via.placeholder.com/160?text=家庭影院+I1800"
+                    "name": "线夹光缆延长臂",
+                    "name_en": "Clamp optical cable extension arm",
+                    "desc": "电力线夹光缆延长臂是一种用于电力线路中安装和固定光缆的辅助装置，通常与电力线夹配合使用，用于延长光缆的敷设范围或调整光缆的安装位置。它主要用于光纤复合架空地线（OPGW）或全介质自承式光缆（ADSS）的安装，确保光缆在电力线路中的安全、稳定运行。",
+                    "desc_en": "The double-groove splint is a component designed to fix cable equipment at equal intervals. The inner wire groove serves as a part capable of tightly clamping the cables. Currently, with the growing variety and expanding application of double-groove splints",
+                    "content": "在电力工程和通信工程中，电力线夹和光缆延长臂经常组合使用。例如，耐张线夹可以用于固定光缆的终端或转角处，而光缆延长臂则可以用于延长光缆的铺设长度。这种组合应用可以确保光缆在铺设过程中的稳定性和安全性，同时提高工程的整体效率和质量。",
+                    "content_en": "In power engineering and communication engineering, power line clamps and fiber optic cable extension arms are often used in combination. For example, tension clamps can be used to secure the terminals or corners of optical cables, while cable extension arms can be used to extend the length of cable laying. This combination of applications can ensure the stability and safety of optical cables during the laying process, while improving the overall efficiency and quality of the project.",
+                    "icon": "https://perhapsdone.github.io/images/18/18.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/18/detail/18.1.png",
+                        "https://perhapsdone.github.io/images/18/detail/18.2.png",
+                        "https://perhapsdone.github.io/images/18/detail/18.3.png"]
                 },
                 {
                     "goodId": 19,
-                    "title": "智能扫地机器人 H1900",
-                    "content": "智能扫地机器人 H1900 配有高效吸尘系统和智能路径规划功能，能够自动清扫和避开障碍物，适合各种地面，解放双手。",
-                    "image": "https://via.placeholder.com/160?text=智能扫地机器人+H1900"
+                    "name": "鸭嘴线夹",
+                    "name_en": "Duckbill wire clamp",
+                    "desc": "电力鸭嘴线夹是一种用于电力线路中连接和固定导线的金具，因其形状类似鸭嘴而得名。它主要用于架空输电线路、配电线路以及电气设备的安装和维护中，实现导线的电气连接和机械固定。",
+                    "desc_en": "The power duckbill clamp is a type of hardware used in power lines to connect and secure conductors, named for its duckbill-like shape. It is primarily used in the installation and maintenance of overhead transmission lines, distribution lines, and electrical equipment, providing both electrical connection and mechanical fixation for conductors.",
+                    "content": "电力鸭嘴线夹具有结构简单、操作方便、安全可靠等特点。它的夹持力大，能够牢固地夹住各种规格的电线或光缆。同时，线夹的绝缘性能良好，能够有效地防止电流泄漏和短路现象的发生。与传统的接地方式相比，电力鸭嘴线夹具有更高的效率和安全性。它能够迅速地将电线与接地系统连接起来，减少了接地操作的时间和难度。此外，线夹的重复使用性也降低了维护成本。",
+                    "content_en": "The electric duckbill cable clamp has the characteristics of simple structure, easy operation, safety and reliability. It has a strong clamping force and can firmly clamp various specifications of wires or optical cables. At the same time, the insulation performance of the wire clamp is good, which can effectively prevent current leakage and short circuit phenomena from occurring. Compared with traditional grounding methods, electric duckbill cable clamps have higher efficiency and safety. It can quickly connect wires to the grounding system, reducing the time and difficulty of grounding operations. In addition, the reusability of the wire clamp also reduces maintenance costs.",
+                    "icon": "https://perhapsdone.github.io/images/19/19.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/19/detail/19.1.png",
+                        "https://perhapsdone.github.io/images/19/detail/19.2.png",
+                        "https://perhapsdone.github.io/images/19/detail/19.3.png"]
                 },
                 {
                     "goodId": 20,
-                    "title": "无线鼠标 G2000",
-                    "content": "无线鼠标 G2000 采用高精度传感器，响应灵敏，适合长时间办公使用。设计符合人体工程学，舒适握感，减少手腕压力。",
-                    "image": "https://via.placeholder.com/160?text=无线鼠标+G2000"
+                    "name": "牙型扣",
+                    "name_en": "Tooth-type buckle",
+                    "desc": "牙型不锈钢扎扣为市场上使用最广泛的的捆绑扣。采用201、304和316不锈钢制成，具有优良的抗腐蚀性能和抗氧化性。",
+                    "desc_en": "The toothed stainless steel buckle is the most prevalently used binding buckle in the market. It is manufactured from 201, 304, and 316 stainless steel and exhibits excellent corrosion resistance and oxidation resistance.",
+                    "content": "牙型不锈钢扎扣采用特殊的齿牙咬合设计，这种设计提供了更加稳固的捆扎力，使其成为应用最为广泛的捆扎扣之一。其材质通常为201、304和316不锈钢，这些材质具有优良的抗腐蚀性能和抗氧化性，能够在恶劣的环境中保持稳定的性能。。",
+                    "content_en": "The tooth shaped stainless steel buckle adopts a special tooth biting design, which provides a more stable binding force, making it one of the most widely used binding buckles. Its materials are usually 201, 304, and 316 stainless steel, which have excellent corrosion resistance and oxidation resistance, and can maintain stable performance in harsh environments.",
+                    "icon": "https://perhapsdone.github.io/images/20/20.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/20/detail/20.1.png",
+                        "https://perhapsdone.github.io/images/20/detail/20.2.png"]
                 },
                 {
                     "goodId": 21,
-                    "title": "手持风扇 F2100",
-                    "content": "手持风扇 F2100 轻便小巧，风力强劲，适合夏季使用。可调节风速，续航时间长，适合户外活动。",
-                    "image": "https://via.placeholder.com/160?text=手持风扇+F2100"
+                    "name": "楔形线夹",
+                    "name_en": "wedge clamp",
+                    "desc": "电力楔形线夹是一种用于电力线路中连接和固定导线或电缆的装置，通常用于输电线路、配电线路或架空线路。它的主要特点是利用楔形结构产生强大的夹紧力，确保导线与线夹之间的可靠连接，同时具有良好的电气性能和机械强度。",
+                    "desc_en": "The power wedge clamp is a device used for connecting and securing conductors or cables in power lines, typically employed in transmission lines, distribution lines, or overhead lines. Its main feature is the use of a wedge mechanism to generate strong clamping force, ensuring a reliable connection between the conductor and the clamp, while providing excellent electrical performance and mechanical strength.",
+                    "content": "楔形线夹主要由槽体、夹线片和杆组成。夹线片抱住导线安置在槽体内，槽体与夹线片相对滑动，从而紧紧地握住导线。对于安普楔形线夹，它则由“C”形元件和楔块两部分组成，“C”形元件的弹簧作用和楔块的独特结构使其与所连接的导线共同构成一个“同呼吸”的能量存储系统。",
+                    "content_en": "The wedge-shaped wire clamp is mainly composed of a groove body, a wire clamp piece, and a rod. The wire clamp is placed inside the groove to hold the wire tightly, and the groove slides relative to the wire clamp, thereby firmly grasping the wire. For the Anpu wedge clamp, it consists of two parts: a 'C' - shaped element and a wedge block. The spring action of the 'C' - shaped element and the unique structure of the wedge block make it form a 'breathing' energy storage system together with the connected wires.",
+                    "icon": "https://perhapsdone.github.io/images/21/21.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/21/detail/21.1.png"]
                 },
                 {
                     "goodId": 22,
-                    "title": "太阳能充电器 E2200",
-                    "content": "太阳能充电器 E2200 具有快速太阳能转换功能，可以为手机、平板等设备提供绿色电力，适合户外活动和旅行使用。",
-                    "image": "https://via.placeholder.com/160?text=太阳能充电器+E2200"
+                    "name": "预绞式耐张线夹",
+                    "name_en": "Preformed dead-end clamp",
+                    "desc": "预绞丝用于架空电力导线以及电力架空光缆终端、悬挂、接头等的连接金具。已经广泛应用于输配电、光纤通讯、电气化铁路、有线电视、建筑、农业等领域。",
+                    "desc_en": "The preformed wire is utilized as a connecting fitting for overhead power conductors and for the terminals, suspensions, and joints of overhead power optical cables. It has been extensively applied in a wide range of fields, such as power transmission and distribution, optical fiber communication, electrified railways, cable television, construction, and agriculture.",
+                    "content": "预绞式耐张线夹的结构相对简单，其双腿绞合形成空管，后部为预成型的绞环。双腿部分缠绕在导线或拉线上时可产生强大的握紧力，而绞环部分则用于固定在绝缘瓷、杆塔或地锚上。这种独特的原理和结构赋予了预绞式耐张线夹卓越的性能和显著的特点。",
+                    "content_en": "The structure of the pre twisted tension clamp is relatively simple, with its legs twisted together to form a hollow tube and a pre formed hinge ring at the rear. When the legs are wrapped around wires or cables, a strong gripping force can be generated, while the hinge part is used to fix on insulating porcelain, towers, or ground anchors. This unique principle and structure endow pre twisted tension clamps with excellent performance and significant features.",
+                    "icon": "https://perhapsdone.github.io/images/22/22.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/22/detail/22.1.png",
+                        "https://perhapsdone.github.io/images/22/detail/22.2.png",
+                        "https://perhapsdone.github.io/images/22/detail/22.3.png"]
                 },
                 {
                     "goodId": 23,
-                    "title": "桌面空气加湿器 D2300",
-                    "content": "桌面空气加湿器 D2300 帮助改善干燥空气，适合办公室和家庭使用，静音设计，不会打扰工作和休息。",
-                    "image": "https://via.placeholder.com/160?text=桌面空气加湿器+D2300"
+                    "name": "多股卡槽固定件",
+                    "name_en": "multi-strand groove fixing clamp",
+                    "desc": "电力多股卡槽固定件是一种用于电力系统中固定多股导线或电缆的装置，主要用于输电线路、配电线路或架空线路等场景。其设计结合了多股导线的特点和卡槽结构的优势，能够确保导线或电缆的稳定连接和可靠固定，同时满足电力系统对机械强度和电气性能的高要求。",
+                    "desc_en": "The multi-strand groove fixing clamp for power applications is a device used in power systems to secure multi-strand conductors or cables. It is primarily employed in scenarios such as transmission lines, distribution lines, or overhead lines. Its design combines the characteristics of multi-strand conductors with the advantages of a groove structure, ensuring stable connections and reliable fixation of conductors or cables. At the same time, it meets the high requirements of power systems for mechanical strength and electrical performance.",
+                    "content": "电力多股卡槽固定件通常由卡槽主体、夹紧件、连接件等部分组成。卡槽主体上设有多个卡槽，用于容纳和固定多股电线或光缆。夹紧件通过螺栓、螺母等紧固件与卡槽主体相连，用于将电线或光缆夹紧在卡槽内。连接件则用于将多个卡槽固定件连接在一起，形成一个整体的固定系统。",
+                    "content_en": "Electric multi strand card slot fixing parts are usually composed of card slot main body, clamping parts, connecting parts, and other parts. The card slot body is equipped with multiple card slots for accommodating and fixing multiple strands of wires or optical cables. The clamping component is connected to the slot body through fasteners such as bolts and nuts, and is used to clamp wires or optical cables in the slot. The connector is used to connect multiple card slot fasteners together to form a unified fixing system.",
+                    "icon": "https://perhapsdone.github.io/images/23/23.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/23/detail/23.1.png",
+                        "https://perhapsdone.github.io/images/23/detail/23.2.png"]
                 },
                 {
                     "goodId": 24,
-                    "title": "车载冰箱 C2400",
-                    "content": "车载冰箱 C2400 适合长途旅行使用，支持低温冷藏和制冷功能，节能环保，车主必备。",
-                    "image": "https://via.placeholder.com/160?text=车载冰箱+C2400"
+                    "name": "夹板拉钩",
+                    "name_en": "clamp hook",
+                    "desc": "电力夹板拉钩是架空线路中用于固定光缆或电缆的重要配件，具有耐腐蚀、安装简便的特点，广泛应用于通信和电力领域。",
+                    "desc_en": "The power clamp hook is an essential accessory used for securing optical cables or power cables in overhead lines. It features corrosion resistance and easy installation, making it widely applicable in the fields of communication and power.",
+                    "content": "电力夹板拉钩通常采用冷轧铁镀锌等优质材料制成，具有良好的抗腐蚀性和耐用性，能够在各种恶劣环境下长期保持稳定的性能。电力夹板拉钩的结构相对简单，易于安装和维护。它通常包括夹板主体、连接孔和紧固装置等部分，通过简单的操作即可实现光缆或电缆的固定。电力夹板拉钩适用于各种规格的光缆或电缆，能够满足不同场景下的安装需求。同时，它还可以与其他支撑件配合使用，形成完整的固定系统。",
+                    "content_en": "Electric clamp hooks are usually made of high-quality materials such as cold-rolled iron and galvanized steel, which have good corrosion resistance and durability, and can maintain stable performance in various harsh environments for a long time. The structure of the power clamp hook is relatively simple, easy to install and maintain. It usually includes a clamp body, connecting holes, and fastening devices, etc., which can be used to fix optical cables or cables with simple operations. The power clamp hook is suitable for various specifications of optical cables or cables, and can meet the installation needs in different scenarios. At the same time, it can also be used in conjunction with other supporting components to form a complete fixed system.",
+                    "icon": "https://perhapsdone.github.io/images/24/24.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/24/detail/24.1.png",
+                        "https://perhapsdone.github.io/images/24/detail/24.2.png",
+                        "https://perhapsdone.github.io/images/24/detail/24.3.png"]
                 },
                 {
                     "goodId": 25,
-                    "title": "迷你投影仪 B2500",
-                    "content": "迷你投影仪 B2500 便于携带，适合家庭、商务和旅游等多种场合，支持高清投影。",
-                    "image": "https://via.placeholder.com/160?text=迷你投影仪+B2500"
+                    "name": "悬垂线夹",
+                    "name_en": "suspension clamp",
+                    "desc": "电力悬垂线夹是电力输电线路中的重要组件，主要用于固定和支撑导线，确保其在悬垂点处的稳定性和安全性。",
+                    "desc_en": "The power suspension clamp is an important component in the power transmission line. It is mainly used to fix and support the conductor, ensuring its stability and safety at the suspension point.",
+                    "content": "预绞丝导线悬垂线夹是电力悬垂线夹中的一种重要类型。它采用预绞丝技术，通过精心设计的铝合金预绞丝紧密包裹导线，并在外层辅以高强度铝合金套壳及U型卡固定，实现了对导线的可靠悬挂与固定。该线夹具有强大的握力、良好的减振性能以及重量轻、磁损小、电晕小等特点，特别适用于220KV及以上高压线路以及重冰区、大跨越等特殊工程环境。",
+                    "content_en": "Pre twisted wire suspension clamp is an important type of power suspension clamp. It adopts pre twisted wire technology, which tightly wraps the wire with carefully designed aluminum alloy pre twisted wire, and is fixed with high-strength aluminum alloy casing and U-shaped card on the outer layer, achieving reliable suspension and fixation of the wire. This clamp has strong grip strength, good vibration reduction performance, as well as characteristics such as light weight, low magnetic loss, and low corona, making it particularly suitable for high voltage lines of 220KV and above, as well as special engineering environments such as heavy ice areas and large spans.",
+                    "icon": "https://perhapsdone.github.io/images/25/25.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/25/detail/25.1.png",
+                        "https://perhapsdone.github.io/images/25/detail/25.2.png",
+                        "https://perhapsdone.github.io/images/25/detail/25.3.png"]
                 },
                 {
                     "goodId": 26,
-                    "title": "电动滑板车 A2600",
-                    "content": "电动滑板车 A2600 适合短途城市通勤，轻便且耐用，最高时速可达 30km/h，支持智能 app 控制。",
-                    "image": "https://via.placeholder.com/160?text=电动滑板车+A2600"
-                },
-                {
-                    "goodId": 27,
-                    "title": "电动牙刷 Z2700",
-                    "content": "电动牙刷 Z2700 提供多种刷牙模式，内置智能计时器，保证每次刷牙时长合适，清洁效果更好。",
-                    "image": "https://via.placeholder.com/160?text=电动牙刷+Z2700"
-                },
-                {
-                    "goodId": 28,
-                    "title": "高压锅 Y2800",
-                    "content": "高压锅 Y2800 快速高效，节省烹饪时间，适合炖汤、煮饭等多种烹饪方式。",
-                    "image": "https://via.placeholder.com/160?text=高压锅+Y2800"
-                },
-                {
-                    "goodId": 29,
-                    "title": "无线耳机 X2900",
-                    "content": "无线耳机 X2900 提供高品质音效，支持快速连接，适合运动和通话使用。",
-                    "image": "https://via.placeholder.com/160?text=无线耳机+X2900"
-                },
-                {
-                    "goodId": 30,
-                    "title": "电动摩托车 W3000",
-                    "content": "电动摩托车 W3000 拥有强劲电池和电机，适合城市通勤使用，环保高效，最大时速 60 公里。",
-                    "image": "https://via.placeholder.com/160?text=电动摩托车+W3000"
-                },
-                {
-                    "goodId": 31,
-                    "title": "智能扫地机器人 M3100",
-                    "content": "智能扫地机器人 M3100 配备高效清扫系统，支持智能路径规划，能够自动避开障碍物并清洁到每个角落。内置大容量电池，续航时间长，适合家庭使用。",
-                    "image": "https://via.placeholder.com/160?text=智能扫地机器人+M3100"
-                },
-                {
-                    "goodId": 32,
-                    "title": "空气净化器 P3200",
-                    "content": "空气净化器 P3200 配备多重过滤系统，能够有效去除空气中的有害物质，适合室内使用。它支持智能模式，根据空气质量自动调节工作状态。",
-                    "image": "https://via.placeholder.com/160?text=空气净化器+P3200"
-                },
-                {
-                    "goodId": 33,
-                    "title": "电热水壶 Q3300",
-                    "content": "电热水壶 Q3300 采用快热技术，快速加热水温，带有温控系统，确保水温始终保持在理想范围内，适合日常饮用热水、冲泡茶叶等。",
-                    "image": "https://via.placeholder.com/160?text=电热水壶+Q3300"
-                },
-                {
-                    "goodId": 34,
-                    "title": "无线吸尘器 V3400",
-                    "content": "无线吸尘器 V3400 配备强力吸力和多种清洁配件，适合地毯、硬地板和车内清洁。轻便设计，使用方便，适合家庭和办公室清洁。",
-                    "image": "https://via.placeholder.com/160?text=无线吸尘器+V3400"
-                },
-                {
-                    "goodId": 35,
-                    "title": "便携式电源 W3500",
-                    "content": "便携式电源 W3500 提供多种输出端口，支持为手机、平板、笔记本电脑等设备充电，适合露营、旅游等户外活动使用。",
-                    "image": "https://via.placeholder.com/160?text=便携式电源+W3500"
-                },
-                {
-                    "goodId": 36,
-                    "title": "游戏鼠标 X3600",
-                    "content": "游戏鼠标 X3600 配备高精度传感器，适合高端游戏玩家。设计符合人体工学，长时间使用也不会感到不适，支持 RGB 背光和多个自定义按键。",
-                    "image": "https://via.placeholder.com/160?text=游戏鼠标+X3600"
-                },
-                {
-                    "goodId": 37,
-                    "title": "电动牙刷 Y3700",
-                    "content": "电动牙刷 Y3700 具有多种清洁模式，可以深层清洁牙齿，提供更好的口腔护理效果。内置智能计时器，帮助您按时刷牙，保持口腔健康。",
-                    "image": "https://via.placeholder.com/160?text=电动牙刷+Y3700"
-                },
-                {
-                    "goodId": 38,
-                    "title": "智能门锁 Z3800",
-                    "content": "智能门锁 Z3800 提供指纹识别、密码解锁和遥控开锁等多种开锁方式，确保家庭安全。内置超长电池寿命和防盗报警功能。",
-                    "image": "https://via.placeholder.com/160?text=智能门锁+Z3800"
-                },
-                {
-                    "goodId": 39,
-                    "title": "车载吸尘器 A3900",
-                    "content": "车载吸尘器 A3900 功率强劲，能够轻松清洁车内每个角落，适合车主日常保养车内环境。配有多个吸头，适用于不同车内区域。",
-                    "image": "https://via.placeholder.com/160?text=车载吸尘器+A3900"
-                },
-                {
-                    "goodId": 40,
-                    "title": "蓝牙音响 B4000",
-                    "content": "蓝牙音响 B4000 提供高品质音效，内置大容量电池，支持无线连接。适合户外派对、旅行和家庭娱乐使用，外形时尚，便于携带。",
-                    "image": "https://via.placeholder.com/160?text=蓝牙音响+B4000"
-                },
-                {
-                    "goodId": 41,
-                    "title": "跑步机 C4100",
-                    "content": "跑步机 C4100 配备多种运动模式和心率监测系统，适合家庭健身使用。它采用减震设计，减少对关节的压力，长时间使用也能保持舒适。",
-                    "image": "https://via.placeholder.com/160?text=跑步机+C4100"
-                },
-                {
-                    "goodId": 42,
-                    "title": "电视机顶盒 D4200",
-                    "content": "电视机顶盒 D4200 支持超高清 4K 视频播放，兼容多种应用程序，提供丰富的娱乐内容，适合家庭影院使用。",
-                    "image": "https://via.placeholder.com/160?text=电视机顶盒+D4200"
-                },
-                {
-                    "goodId": 43,
-                    "title": "电动剃须刀 E4300",
-                    "content": "电动剃须刀 E4300 配备精密刀片和多项智能功能，提供干湿两用剃须体验，内置大电池，支持长时间使用，舒适且高效。",
-                    "image": "https://via.placeholder.com/160?text=电动剃须刀+E4300"
-                },
-                {
-                    "goodId": 44,
-                    "title": "电动榨汁机 F4400",
-                    "content": "电动榨汁机 F4400 配备高效电机，能够快速榨取水果和蔬菜的汁液，保留更多营养成分，适合家庭日常使用，便于清洗。",
-                    "image": "https://via.placeholder.com/160?text=电动榨汁机+F4400"
-                },
-                {
-                    "goodId": 45,
-                    "title": "厨房秤 G4500",
-                    "content": "厨房秤 G4500 提供精准的测量功能，适用于烘焙和日常烹饪，设计简洁，操作方便，支持单位切换。",
-                    "image": "https://via.placeholder.com/160?text=厨房秤+G4500"
-                },
-                {
-                    "goodId": 46,
-                    "title": "迷你冰箱 H4600",
-                    "content": "迷你冰箱 H4600 适合小型公寓和办公室使用，节省空间，内部储存空间灵活，可调节温度，支持冷藏和冷冻功能。",
-                    "image": "https://via.placeholder.com/160?text=迷你冰箱+H4600"
-                },
-                {
-                    "goodId": 47,
-                    "title": "智能家居系统 I4700",
-                    "content": "智能家居系统 I4700 提供全方位的家庭自动化控制，支持语音控制、智能灯光、温控和安全监控等功能，提升居家体验。",
-                    "image": "https://via.placeholder.com/160?text=智能家居系统+I4700"
-                },
-                {
-                    "goodId": 48,
-                    "title": "LED台灯 J4800",
-                    "content": "LED台灯 J4800 采用高亮LED灯珠，提供柔和的光线，减少眼睛疲劳，适合学习和工作使用。支持调光和调色温功能。",
-                    "image": "https://via.placeholder.com/160?text=LED台灯+J4800"
-                },
-                {
-                    "goodId": 49,
-                    "title": "电热毯 K4900",
-                    "content": "电热毯 K4900 提供多档温控，适合冬季使用，能够快速加热，为您提供温暖舒适的睡眠体验。",
-                    "image": "https://via.placeholder.com/160?text=电热毯+K4900"
-                },
-                {
-                    "goodId": 50,
-                    "title": "智能冰箱 L5000",
-                    "content": "智能冰箱 L5000 配备多功能智能管理系统，支持温度调节和食材管理，适合家庭使用，帮助保持食材新鲜。",
-                    "image": "https://via.placeholder.com/160?text=智能冰箱+L5000"
-                },
-                {
-                    "goodId": 51,
-                    "title": "无线耳机 M5100",
-                    "content": "无线耳机 M5100 采用最新蓝牙技术，提供清晰的音质和低延迟的连接体验。内置降噪功能，适合运动、通话和日常使用。",
-                    "image": "https://via.placeholder.com/160?text=无线耳机+M5100"
-                },
-                {
-                    "goodId": 52,
-                    "title": "数码相机 N5200",
-                    "content": "数码相机 N5200 拥有高达 24MP 的分辨率，支持高清视频录制，适合摄影爱好者和旅行者，拍摄出色的照片和视频。",
-                    "image": "https://via.placeholder.com/160?text=数码相机+N5200"
-                },
-                {
-                    "goodId": 53,
-                    "title": "智能音响 O5300",
-                    "content": "智能音响 O5300 提供高保真音质，内置语音助手，支持智能家居控制和流媒体播放，提升您的家庭娱乐体验。",
-                    "image": "https://via.placeholder.com/160?text=智能音响+O5300"
-                },
-                {
-                    "goodId": 54,
-                    "title": "电动滑板车 P5400",
-                    "content": "电动滑板车 P5400 配备高效电池，续航长达 40km，适合城市通勤使用。具有折叠设计，方便携带，支持多档速度调节。",
-                    "image": "https://via.placeholder.com/160?text=电动滑板车+P5400"
-                },
-                {
-                    "goodId": 55,
-                    "title": "智能空气净化器 Q5500",
-                    "content": "智能空气净化器 Q5500 配备 HEPA 滤芯，能够过滤空气中的 PM2.5、甲醛、细菌等有害物质，适合家庭和办公环境使用。",
-                    "image": "https://via.placeholder.com/160?text=智能空气净化器+Q5500"
-                },
-                {
-                    "goodId": 56,
-                    "title": "电动摩托车 R5600",
-                    "content": "电动摩托车 R5600 提供强劲的动力和较长的续航，适合短途出行。外形现代，设计时尚，适合城市道路和快速通勤。",
-                    "image": "https://via.placeholder.com/160?text=电动摩托车+R5600"
-                },
-                {
-                    "goodId": 57,
-                    "title": "便携投影仪 S5700",
-                    "content": "便携投影仪 S5700 支持高清投影，拥有较强的光亮度，适合家庭影院、商务演示和户外活动使用。",
-                    "image": "https://via.placeholder.com/160?text=便携投影仪+S5700"
-                },
-                {
-                    "goodId": 58,
-                    "title": "电热水壶 T5800",
-                    "content": "电热水壶 T5800 使用高效加热技术，能够迅速烧开水。设计简洁，拥有防干烧保护和自动断电功能，保证使用安全。",
-                    "image": "https://via.placeholder.com/160?text=电热水壶+T5800"
-                },
-                {
-                    "goodId": 59,
-                    "title": "蓝牙耳机 U5900",
-                    "content": "蓝牙耳机 U5900 提供清晰的音质和长时间的佩戴舒适感，支持触控操作，适合运动和通勤使用。",
-                    "image": "https://via.placeholder.com/160?text=蓝牙耳机+U5900"
-                },
-                {
-                    "goodId": 60,
-                    "title": "冰箱 V6000",
-                    "content": "冰箱 V6000 具有大容量设计，适合家庭使用。节能效果好，支持调节温度和快速冷却功能，保持食材的新鲜度。",
-                    "image": "https://via.placeholder.com/160?text=冰箱+V6000"
-                },
-                {
-                    "goodId": 61,
-                    "title": "智能门铃 W6100",
-                    "content": "智能门铃 W6100 配备高清摄像头，支持实时视频监控和双向语音对话，确保家庭安全。可通过手机远程控制，查看门外情况。",
-                    "image": "https://via.placeholder.com/160?text=智能门铃+W6100"
-                },
-                {
-                    "goodId": 62,
-                    "title": "电子书阅读器 X6200",
-                    "content": "电子书阅读器 X6200 配备电子墨水屏，能够提供长时间舒适阅读体验。内置大容量存储，适合存放大量书籍。",
-                    "image": "https://via.placeholder.com/160?text=电子书阅读器+X6200"
-                },
-                {
-                    "goodId": 63,
-                    "title": "智能手表 Y6300",
-                    "content": "智能手表 Y6300 配备心率监测、GPS 定位、运动追踪等功能。防水设计，适合运动和户外活动，拥有较长电池续航。",
-                    "image": "https://via.placeholder.com/160?text=智能手表+Y6300"
-                },
-                {
-                    "goodId": 64,
-                    "title": "电动按摩器 Z6400",
-                    "content": "电动按摩器 Z6400 提供多种按摩模式，能够缓解肌肉疲劳，适合长时间工作后的放松使用。它的小巧设计，方便携带。",
-                    "image": "https://via.placeholder.com/160?text=电动按摩器+Z6400"
-                },
-                {
-                    "goodId": 65,
-                    "title": "厨房多功能料理机 A6500",
-                    "content": "厨房多功能料理机 A6500 配备多种配件，支持搅拌、榨汁、切割等功能，帮助您轻松准备美食。适合日常家庭烹饪使用。",
-                    "image": "https://via.placeholder.com/160?text=厨房多功能料理机+A6500"
-                },
-                {
-                    "goodId": 66,
-                    "title": "车载冰箱 B6600",
-                    "content": "车载冰箱 B6600 配备大容量冷藏空间，适合长途旅行时使用。支持温控功能，能够保持食物和饮料的新鲜。",
-                    "image": "https://via.placeholder.com/160?text=车载冰箱+B6600"
-                },
-                {
-                    "goodId": 67,
-                    "title": "运动手环 C6700",
-                    "content": "运动手环 C6700 提供步数计数、心率监测和睡眠分析等功能，适合日常健身和运动使用。配备防水设计，适合多种运动场景。",
-                    "image": "https://via.placeholder.com/160?text=运动手环+C6700"
-                },
-                {
-                    "goodId": 68,
-                    "title": "蓝牙音响 D6800",
-                    "content": "蓝牙音响 D6800 提供优质音效，支持无线连接和语音控制，适合家庭娱乐和户外活动使用。",
-                    "image": "https://via.placeholder.com/160?text=蓝牙音响+D6800"
-                },
-                {
-                    "goodId": 69,
-                    "title": "智能烟雾报警器 E6900",
-                    "content": "智能烟雾报警器 E6900 提供高灵敏度的烟雾检测功能，内置声光报警，能够有效保障家庭的火灾安全。",
-                    "image": "https://via.placeholder.com/160?text=智能烟雾报警器+E6900"
-                },
-                {
-                    "goodId": 70,
-                    "title": "车载吸尘器 F7000",
-                    "content": "车载吸尘器 F7000 配备高效吸力，适合清洁车内各个角落，轻便设计，使用方便，支持多个吸头，更好地清洁车内区域。",
-                    "image": "https://via.placeholder.com/160?text=车载吸尘器+F7000"
-                },
-                {
-                    "goodId": 71,
-                    "title": "手持蒸汽熨斗 G7100",
-                    "content": "手持蒸汽熨斗 G7100 配备强力蒸汽，能够迅速去除衣物上的皱褶，适合日常穿着的衣物熨烫，设计小巧，便于携带。",
-                    "image": "https://via.placeholder.com/160?text=手持蒸汽熨斗+G7100"
-                },
-                {
-                    "goodId": 72,
-                    "title": "智能电动牙刷 H7200",
-                    "content": "智能电动牙刷 H7200 采用高频震动技术，有效清洁牙齿并去除牙菌斑，支持多种刷牙模式，帮助提高口腔卫生。",
-                    "image": "https://via.placeholder.com/160?text=智能电动牙刷+H7200"
-                },
-                {
-                    "goodId": 73,
-                    "title": "无线吸尘器 I7300",
-                    "content": "无线吸尘器 I7300 提供强劲吸力和长时间的电池续航，适合家庭清洁使用。配备多种吸头，能够清洁不同表面。",
-                    "image": "https://via.placeholder.com/160?text=无线吸尘器+I7300"
-                },
-                {
-                    "goodId": 74,
-                    "title": "电动修眉器 J7400",
-                    "content": "电动修眉器 J7400 配备精准修剪刀头，能够轻松修整眉毛和胡须，方便携带，适合外出使用。",
-                    "image": "https://via.placeholder.com/160?text=电动修眉器+J7400"
-                },
-                {
-                    "goodId": 75,
-                    "title": "智能灯泡 K7500",
-                    "content": "智能灯泡 K7500 支持调光和调色功能，能够根据需要调节亮度和色温，配合智能家居系统，创造理想的居住环境。",
-                    "image": "https://via.placeholder.com/160?text=智能灯泡+K7500"
-                },
-                {
-                    "goodId": 76,
-                    "title": "运动鞋 L7600",
-                    "content": "运动鞋 L7600 采用透气材质，设计舒适，适合跑步和各种运动。底部采用防滑设计，提供更好的抓地力。",
-                    "image": "https://via.placeholder.com/160?text=运动鞋+L7600"
-                },
-                {
-                    "goodId": 77,
-                    "title": "家用净水器 M7700",
-                    "content": "家用净水器 M7700 配备多级过滤系统，能够有效去除水中的有害物质，保障家庭用水的健康和安全。",
-                    "image": "https://via.placeholder.com/160?text=家用净水器+M7700"
-                },
-                {
-                    "goodId": 78,
-                    "title": "可穿戴睡眠监测器 N7800",
-                    "content": "可穿戴睡眠监测器 N7800 提供全天候的睡眠监测，分析您的睡眠质量并提供改善建议，帮助您获得更好的休息。",
-                    "image": "https://via.placeholder.com/160?text=可穿戴睡眠监测器+N7800"
-                },
-                {
-                    "goodId": 79,
-                    "title": "智能电风扇 O7900",
-                    "content": "智能电风扇 O7900 配备多档风速调节，支持定时关闭和遥控操作，适合家庭和办公室使用。",
-                    "image": "https://via.placeholder.com/160?text=智能电风扇+O7900"
-                },
-                {
-                    "goodId": 80,
-                    "title": "迷你冰箱 P8000",
-                    "content": "迷你冰箱 P8000 设计紧凑，适合放在小型公寓或办公室。提供较大的储物空间，能够存放饮料和食物。",
-                    "image": "https://via.placeholder.com/160?text=迷你冰箱+P8000"
-                },
-                {
-                    "goodId": 81,
-                    "title": "电子书阅读灯 Q8100",
-                    "content": "电子书阅读灯 Q8100 提供柔和的光线，适合夜间阅读使用。支持多种亮度调节，保护眼睛不受强光影响。",
-                    "image": "https://via.placeholder.com/160?text=电子书阅读灯+Q8100"
-                },
-                {
-                    "goodId": 82,
-                    "title": "智能水壶 R8200",
-                    "content": "智能水壶 R8200 配备温控功能，能够精确控制水温，适合泡茶和咖啡使用，方便快捷。",
-                    "image": "https://via.placeholder.com/160?text=智能水壶+R8200"
-                },
-                {
-                    "goodId": 83,
-                    "title": "可调节办公椅 S8300",
-                    "content": "可调节办公椅 S8300 提供舒适的坐感和多种调节功能，适合长时间办公使用，减轻腰背压力。",
-                    "image": "https://via.placeholder.com/160?text=可调节办公椅+S8300"
-                },
-                {
-                    "goodId": 84,
-                    "title": "智能烤箱 T8400",
-                    "content": "智能烤箱 T8400 提供多种烘焙模式，能够快速烹饪食物。支持智能控制，可以通过手机调整温度和时间。",
-                    "image": "https://via.placeholder.com/160?text=智能烤箱+T8400"
-                },
-                {
-                    "goodId": 85,
-                    "title": "智能空气净化器 U8500",
-                    "content": "智能空气净化器 U8500 采用先进的过滤技术，能够清洁空气中的有害物质。它的静音设计，适合夜间使用。",
-                    "image": "https://via.placeholder.com/160?text=智能空气净化器+U8500"
-                },
-                {
-                    "goodId": 86,
-                    "title": "电动牙刷 V8600",
-                    "content": "电动牙刷 V8600 提供高效清洁，内置智能提醒功能，能够帮助用户养成良好的刷牙习惯，保护口腔健康。",
-                    "image": "https://via.placeholder.com/160?text=电动牙刷+V8600"
-                },
-                {
-                    "goodId": 87,
-                    "title": "智能健身器械 W8700",
-                    "content": "智能健身器械 W8700 提供多种训练模式，适合家庭健身使用。通过APP连接，能够实时监测运动数据并提供个性化建议。",
-                    "image": "https://via.placeholder.com/160?text=智能健身器械+W8700"
-                },
-                {
-                    "goodId": 88,
-                    "title": "智能吸尘器 X8800",
-                    "content": "智能吸尘器 X8800 提供强劲吸力和智能路径规划，能够高效清洁家庭每个角落，适合宠物家庭使用。",
-                    "image": "https://via.placeholder.com/160?text=智能吸尘器+X8800"
-                }
-            ]
-        };
-        localStorage.setItem("products_data", JSON.stringify(jsonData));
+                    "name": "光缆固定线夹",
+                    "name_en": "Optical Cable Fixing Clamp",
+                    "desc": "电力光缆固定线夹是用于稳固电力光缆的关键部件。在电力传输系统中，光缆需精准且牢固地安装，以保障信号稳定传输，线夹就承担起这一重要使命。",
+                    "desc_en": "Power optical cable fixing clamps are key components used to secure power optical cables. In the power transmission system, optical cables need to be installed precisely and firmly to ensure stable signal transmission, and the clamps undertake this important mission..",
+                    "content": "电力光缆固定线夹通常由金属材料（如不锈钢、铝合金等）制成，这些材料具有良好的抗腐蚀性和耐用性，能够在各种恶劣环境下长期保持稳定的性能。线夹的结构设计通常包括夹体、紧固装置（如螺丝、卡扣等）以及可能的保护垫片等部件，以确保光缆被牢固且安全地固定。",
+                    "content_en": "The fixed clamps of power optical cables are usually made of metal materials (such as stainless steel, aluminum alloy, etc.), which have good corrosion resistance and durability, and can maintain stable performance in various harsh environments for a long time. The structural design of a cable clamp typically includes components such as the clamp body, fastening devices (such as screws, buckles, etc.), and possible protective washers to ensure that the cable is securely and safely fixed.",
+                    "icon": "https://perhapsdone.github.io/images/26/26.png",
+                    "detail_icons": ["https://perhapsdone.github.io/images/26/detail/26.1.png",
+                        "https://perhapsdone.github.io/images/26/detail/26.2.png",
+                        "https://perhapsdone.github.io/images/26/detail/26.3.png"]
+                }]
+        }
+        localStorage.setItem("products_data", JSON.stringify(data));
+
+        function renderGoodsList () {
+            const list = document.getElementById('goods-list');
+            let html = '';
+
+            const data = JSON.parse(localStorage.getItem("products_data"));
 
 
+            console.log(JSON.stringify(data));
 
+            const goods = data.goods.slice(0, 6);  // 取前六个商品
 
+            goods.forEach((good, index) => {
 
-        // 从 localStorage 获取 JSON 数据
-        const data = JSON.parse(localStorage.getItem("products_data"));
-        console.log(data);  // 输出：{ key: "value" }
+                let currentLang = localStorage.getItem('selectedLang') || 'en';
+                const displayName = (currentLang === 'zh') ? good.name : good.name_en;
 
-        const goods = data.goods.slice(0, 6);  // 取前六个商品
+                // 计算延迟时间（每项间隔200ms）
+                const delay = (index * 200).toString().padStart(3, '0') + 'ms';
+                // 判断是否需要添加左边距类
+                const marginClass = (index % 3 === 0) ? 'no_marginl' : '';
 
-        const productList = document.getElementById('product-box-list');
-        productList.innerHTML = '';  // 清空当前商品列表
-
-        goods.forEach(good => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('list-item', 'no_marginl', 'wow', 'fadeInUp');
-            listItem.setAttribute('data-wow-delay', `${goods.indexOf(good) * 200}ms`);
-
-            listItem.innerHTML = `
+                html += `
+            <li class="list-item ${marginClass} wow fadeInUp" data-wow-delay="${delay}">
                 <div class="item-pic scale-big an-bd5">
-                    <a href="${good.link}" title="${good.title}">
-                        <img class="nlazy" data-original="${good.image}" alt="${good.title}">
+                    <a href="products/detail.html?goodId=${good.goodId}" title="${displayName}">
+                        <img class="nlazy" 
+                            src="${good.icon}"
+                            alt="${displayName}">
                     </a>
-                    <a href="${good.link}" class="item-backdrop"><i class="iconfont icon-lianjie"></i></a>
+                    <a href="products/detail.html?goodId=${good.goodId}" class="item-backdrop">
+                        <i class="iconfont icon-lianjie"></i>
+                    </a>
                 </div>
                 <div class="item-body">
                     <p class="item-title">
-                        <a class="self-ellipsis" href="${good.link}">${good.title}</a>
+                        <a class="self-ellipsis" href="products/detail.html?goodId=${good.goodId}">${displayName}</a>
                     </p>
-                    <a href="${good.link}" class="item-btn" rel="nofollow">
+                    <a href="products/detail.html?goodId=${good.goodId}" class="item-btn" rel="nofollow">
                         <img src="themes/template/0614/static/images/web1.png">
                     </a>
                 </div>
-            `;
-            productList.appendChild(listItem);
+            </li>`;
+            });
 
+            list.innerHTML = html;
+        }
+
+        // 初始化语言
+        function initLanguage () {
+            // 设置按钮状态
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            // 初始加载内容
+            updateContent();
+            renderGoodsList();
+        }
+
+        // 切换语言事件
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.dataset.lang;
+                localStorage.setItem('selectedLang', currentLang);
+                initLanguage();
+            });
         });
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initLanguage);
 
     </script>
 </body>

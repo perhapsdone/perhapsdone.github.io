@@ -45,6 +45,157 @@
         gtag('config', 'G-NFH9Z3P0QR');
     </script>
     <meta name="google-site-verification" content="fy4xJm-X2GK1Ewp8LaCVKcvVtalgaR3MZXXfzdnXd3A" />
+
+
+    <!-- 在<head>标签内添加以下样式 -->
+    <style>
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-btn {
+            padding: 5px 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .language-btn.active {
+            background: #276DC1;
+            color: white;
+            border-color: #276DC1;
+        }
+    </style>
+
+    <script>
+        // 多语言配置
+        const i18n = {
+            en: {
+                // 导航
+                nav: {
+                    home: "Home",
+                    about: "About Us",
+                    products: "Products",
+                    contact: "Contact Us"
+                },
+                // 联系信息
+                contact: {
+                    title: "Contact Us",
+                    tel: "Tel",
+                    email: "E-mail",
+                    address: "Address",
+                    wechat: "WeChat",
+                    founded: "Established Date: November 11, 2020",
+                    companyAddress: "Address: North of Fiscal Bureau Residential Area, Jianshe East Road, Renqiu City, Hebei Province"
+                },
+                // 页脚
+                footer: {
+                    navigation: "Navigation",
+                    contactUs: "Contact Us",
+                    address: "Address",
+                    copyright: "Copyright © Hebei Zhenguan International Trade Co., Ltd. All Rights Reserved."
+                },
+                index: {
+                    abount_title: "About Us",
+                    abount_content: "",
+                    products_title: "Products",
+                    products_content: "",
+                },
+                about: {
+                    title: "Zhenguan International Trading Co., LTD",
+                    content_0: "Zhenguan International Trading Co., Ltd. is a comprehensive manufacturing and trading enterprise with a high reputation in the industry, focusing on the production and sales of power crossarm, laser cutting custom iron parts, steel strand, pre-twisted tensioning clamp and other products. We are committed to providing customers around the world with high quality, high performance power accessories and customized solutions to help them achieve efficient and safe project implementation.",
+                    subtitle_1: "Strength",
+                    content_1: "Since its establishment, we have won wide recognition from customers with excellent product quality, leading technical strength and excellent service. The company has first-class production equipment and perfect quality control system, equipped with an experienced and skilled professional team, from product development, manufacturing to after-sales service, every step of excellence. Our products are not only complete in variety and rich in style, but also support the processing and customization of drawings and samples to fully meet the individual needs of customers.",
+                    subtitle_2: "Innovation and efficiency",
+                    content_2: "In the fierce market competition, we take \"innovation-driven, efficiency first\" as the development concept, and always walk in the forefront of industry technology development.",
+                    subtitle_3: "Quality and Service",
+                    content_3: "We introduce advanced laser cutting technology and automated production lines to ensure that every product has excellent precision and quality. Our self-built logistics supply chain system can quickly respond to customer needs, achieve efficient delivery, and help customers seize market opportunities.",
+                    subtitle_4: "Cooperation and win-win",
+                    content_4: "Zhenguan International Trading Co., LTD. - Shaping the future with innovation, casting trust with quality, and realizing value with service. Choose us, is to choose success!",
+                }
+            },
+            zh: {
+                nav: {
+                    home: "首页",
+                    about: "关于我们",
+                    products: "产品中心",
+                    contact: "联系我们"
+                },
+                contact: {
+                    title: "联系我们",
+                    tel: "电话",
+                    email: "电子邮箱",
+                    address: "地址",
+                    wechat: "微信",
+                    founded: "成立时间：2020年11月11日",
+                    companyAddress: "地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧"
+                },
+                footer: {
+                    navigation: "导航",
+                    contactUs: "联系我们",
+                    address: "地址",
+                    copyright: "版权所有 © 河北真观国际贸易有限公司"
+                },
+                index: {
+                    abount_title: "关于我们",
+                    abount_content: "",
+                    products_title: "产品简介",
+                    products_content: "",
+                },
+                about: {
+                    title: "真观国际贸易有限公司",
+                    content_0: "真观国际贸易有限公司是一家在行业内享有盛誉的综合性制造与贸易企业，专注于生产和销售电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等产品。我们致力于为全球客户提供高品质、高性能的电力配件和定制解决方案，帮助他们实现高效、安全的项目实施。",
+                    subtitle_1: "我们的实力",
+                    content_1: "自成立以来，我们以卓越的产品质量、领先的技术实力和优质的服务赢得了客户的广泛认可。公司拥有一流的生产设备和完善的质控体系，配备了一支经验丰富、技术过硬的专业团队，从产品研发、制造到售后服务，每一步都精益求精。我们的产品不仅种类齐全、款式丰富，还支持来图来样加工定制，充分满足客户的个性化需求。",
+                    subtitle_2: "创新与效率",
+                    content_2: "在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。",
+                    subtitle_3: "质量至上，服务为本",
+                    content_3: "我们引入先进的激光切割技术和自动化生产线，确保每一件产品都具备卓越的精度与品质。我们自主搭建的物流供应链系统，能够快速响应客户需求，实现高效发货，助力客户抢占市场先机。",
+                    subtitle_4: "合作与共赢",
+                    content_4: "真观国际贸易有限公司——用创新塑造未来，用品质铸就信赖，用服务实现价值。选择我们，就是选择成功！",
+                }
+            }
+        };
+
+        // 初始化语言
+        let currentLang = localStorage.getItem('selectedLang') || 'en';
+
+        function updateContent () {
+            // 更新导航
+            document.querySelectorAll('[data-i18n-nav]').forEach(el => {
+                const key = el.getAttribute('data-i18n-nav');
+                el.textContent = i18n[currentLang].nav[key];
+            });
+
+            // 更新联系信息
+            document.querySelectorAll('[data-i18n-contact]').forEach(el => {
+                const key = el.getAttribute('data-i18n-contact');
+                el.textContent = i18n[currentLang].contact[key];
+            });
+
+            // 更新页脚
+            document.querySelectorAll('[data-i18n-about]').forEach(el => {
+                const key = el.getAttribute('data-i18n-about');
+                el.textContent = i18n[currentLang].about[key];
+            });
+
+            // 更新页脚
+            document.querySelectorAll('[data-i18n-footer]').forEach(el => {
+                const key = el.getAttribute('data-i18n-footer');
+                el.textContent = i18n[currentLang].footer[key];
+            });
+
+            // 更新页面标题和元数据
+            document.title = i18n[currentLang].contact.title;
+            document.documentElement.lang = currentLang;
+        }
+    </script>
 </head>
 
 <body>
@@ -61,7 +212,6 @@
     </div>
 
     <!-- header start -->
-    <!-- header start -->
     <header class="header wp1 ">
         <div class="logo wow flipInX">
             <a href="index.html" title="Hebei Zhenguan International Trade Co., Ltd." class="logo-a">
@@ -74,12 +224,18 @@
             </a>
         </div>
         <div class="h-bot fix">
+            <!-- 修改导航菜单 -->
             <ul class="navlist fix">
-                <li> <a href="index.html" title="Home">Home</a> </li>
-                <li class="nav-active"> <a href="about-us.html" title="About Us">About Us</a> </li>
-                <li> <a href="products.html" title="Products">Products</a></li>
-                <li> <a href="contact-us.html" title="Contact Us">Contact Us</a> </li>
+                <li><a href="index.html" data-i18n-nav="home">Home</a></li>
+                <li class="nav-active"><a href="about-us.html" data-i18n-nav="about">About Us</a></li>
+                <li><a href="products.html" data-i18n-nav="products">Products</a></li>
+                <li><a href="contact-us.html" data-i18n-nav="contact">Contact Us</a></li>
             </ul>
+        </div>
+        <!-- 在<body>开始标签后添加语言切换按钮 -->
+        <div class="language-switcher">
+            <button class="language-btn" data-lang="en">EN</button>
+            <button class="language-btn" data-lang="zh">中文</button>
         </div>
     </header>
 
@@ -89,8 +245,9 @@
             <div class="wp"><span style="display:inline-block; direction:ltr">About Us</span></div>
         </div> -->
         <div class="wp">
-            <p class="item-title"> <a href="index.html" style="display:inline-block; direction:ltr">Home</a>
-                > <span class="active" style="display:inline-block; direction:ltr">About Us</span>
+            <p class="item-title"> <a href="index.html" style="display:inline-block; direction:ltr"
+                    data-i18n-nav="home">Home</a>
+                > <span class="active" style="display:inline-block; direction:ltr" data-i18n-nav="about">About Us</span>
             </p>
         </div>
     </div>
@@ -106,239 +263,44 @@
                     <html>
 
                     <body>
-                        <h2 style="text-align: center; font-family: Arial, sans-serif;"><strong>真观国际贸易有限公司</strong></h2>
+                        <h2 style="text-align: center; font-family: Arial, sans-serif;"><strong
+                                data-i18n-about="title">真观国际贸易有限公司</strong></h2>
 
                         <p>&nbsp;</p>
 
-                        <p>真观国际贸易有限公司是一家在行业内享有盛誉的综合性制造与贸易企业，专注于生产和销售电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等产品。我们致力于为全球客户提供高品质、高性能的电力配件和定制解决方案，帮助他们实现高效、安全的项目实施。
+                        <p data-i18n-about="content_0">
+                            真观国际贸易有限公司是一家在行业内享有盛誉的综合性制造与贸易企业，专注于生产和销售电力横担、激光切割定制铁件、钢绞线、预绞式耐张线夹等产品。我们致力于为全球客户提供高品质、高性能的电力配件和定制解决方案，帮助他们实现高效、安全的项目实施。
                         </p>
 
                         <p>&nbsp;</p>
-                        <p><strong>我们的实力</strong></p>
-                        <p>自成立以来，我们以卓越的产品质量、领先的技术实力和优质的服务赢得了客户的广泛认可。公司拥有一流的生产设备和完善的质控体系，配备了一支经验丰富、技术过硬的专业团队，从产品研发、制造到售后服务，每一步都精益求精。我们的产品不仅种类齐全、款式丰富，还支持来图来样加工定制，充分满足客户的个性化需求。
+                        <p><strong data-i18n-about="subtitle_1">我们的实力</strong></p>
+                        <p data-i18n-about="content_1">
+                            自成立以来，我们以卓越的产品质量、领先的技术实力和优质的服务赢得了客户的广泛认可。公司拥有一流的生产设备和完善的质控体系，配备了一支经验丰富、技术过硬的专业团队，从产品研发、制造到售后服务，每一步都精益求精。我们的产品不仅种类齐全、款式丰富，还支持来图来样加工定制，充分满足客户的个性化需求。
                         </p>
 
                         <p>&nbsp;</p>
-                        <p><strong>创新与效率</strong></p>
-                        <p>在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。我们引入先进的激光切割技术和自动化生产线，确保每一件产品都具备卓越的精度与品质。我们自主搭建的物流供应链系统，能够快速响应客户需求，实现高效发货，助力客户抢占市场先机。
+                        <p><strong data-i18n-about="subtitle_2">创新与效率</strong></p>
+                        <p data-i18n-about="content_2">
+                            在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。我们引入先进的激光切割技术和自动化生产线，确保每一件产品都具备卓越的精度与品质。我们自主搭建的物流供应链系统，能够快速响应客户需求，实现高效发货，助力客户抢占市场先机。
                         </p>
 
                         <p>&nbsp;</p>
-                        <p><strong>质量至上，服务为本</strong></p>
-                        <p>在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。我们引入先进的激光切割技术和自动化生产线，确保每一件产品都具备卓越的精度与品质。我们自主搭建的物流供应链系统，能够快速响应客户需求，实现高效发货，助力客户抢占市场先机。
+                        <p><strong data-i18n-about="subtitle_3">质量至上，服务为本</strong></p>
+                        <p data-i18n-about="content_3">
+                            在激烈的市场竞争中，我们以“创新驱动，效率为先”为发展理念，始终走在行业技术发展的前沿。我们引入先进的激光切割技术和自动化生产线，确保每一件产品都具备卓越的精度与品质。我们自主搭建的物流供应链系统，能够快速响应客户需求，实现高效发货，助力客户抢占市场先机。
                         </p>
 
                         <p>&nbsp;</p>
-                        <p><strong>合作与共赢</strong></p>
-                        <p>真观国际贸易有限公司——用创新塑造未来，用品质铸就信赖，用服务实现价值。选择我们，就是选择成功！
+                        <p><strong data-i18n-about="subtitle_4">合作与共赢</strong></p>
+                        <p data-i18n-about="content_4">真观国际贸易有限公司——用创新塑造未来，用品质铸就信赖，用服务实现价值。选择我们，就是选择成功！
                         </p>
-
-
-                        <!-- <p style="font-family: Arial, sans-serif; text-align: center; margin-top: 20px;">
-                            <strong>联系我们</strong><br>
-                            手机: +86 0317 22085743<br>
-                            电话: +86 157 3377 6606<br>
-                            微信: Lxd527276908<br>
-                            邮箱: <a href="mailto:contact@zgtrade.com"
-                                style="color: #2980b9; text-decoration: none;">contact@zgtrade.com</a><br>
-                            地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧<br>
-                        </p> -->
 
                         <p>&nbsp;</p>
                         <p style="text-align: center;">
-                            <img src="https://s21.ax1x.com/2024/11/21/pAWq9dH.jpg" alt="真观国际贸易有限公司"
-                                style="max-width: 70%; height: auto; margin-top: 20px;">
+                            <img src="https://s21.ax1x.com/2024/11/21/pAWq9dH.jpg?x-oss-process=image/format,webp,image/resize,m_pad,h_750,w_1920,color_FFFFFF"
+                                alt="真观国际贸易有限公司" style="max-width: 70%; height: auto; margin-top: 20px;">
                         </p>
                     </body>
-
-
-                    <!-- <body>
-                        <h2 style="text-align: center;"><strong>真观国际贸易有限公司</strong></h2>
-
-                        <p>&nbsp;</p>
-
-                        <p>Shijiazhuang Huaneng Electric Power Fitting Co. Ltd. is a new company with abilities of
-                           anufacture and trade. The company locates in No.189, Hengshan Street, Shijiazhuang
-                            High-tech Development Zone, Hebei Province, China, covering the area 26,593 square meters.
-                        </p>
-
-                        <p>Research Institute and Shanghai Electric Cable Research
-                            Institute, and passed identification of the expert group of Hebei Economic and Trade
-                            committee. Our company was named as a high-tech enterprise by Hebei Science and Technique
-                            Bureau.</p>
-
-                        <p>From the beginning of establishment, we pay more attention to the quality of products,
-                            strengthened the quality conception of employees, and build up a perfect quality-control
-                            system, so we have passed the qualification of ISO 9001:2008 international quality system
-                            identification. In our company there are enough experts and advanced equipments for
-                            production and examinations, Our products have been sold to many localities in nation and
-                            overseas, and been used in lines of different voltage degree. Suffering the rigorous test in
-                            every kind of weather conditional, our products still work very well without any trouble
-                            occurrence.</p>
-
-                        <p>In order to offer the customer a exact and effective plan of reduce-vibration , Our company
-                            established a vibration-laboratory with the help of transmission line experts and the
-                            vibrate experts of the national power company. We can test the power characteristic and
-                            tired function of vibration damper, and tesration valuation in the
-                            the OPGW and ADSS optical cables, consequently providing a scientific trial basis for design
-                            of reduce-vibration in the projects.</p>
-
-                        <p><strong>Our quality guideline: </strong>Regarding customer as our focus with attention,
-                            persisting in innovating in techniques, strengthening and perfecting quality-control system,
-                            providing the high-tech product for electric power developments.</p>
-
-                        <p><strong>Our quantity target: </strong>The eligibility rate in products amounts to 100%; The
-                            customer approval attains 95%.</p>
-
-                        <p>Welcome each expert to visit our company and supervise our works.</p>
-
-                        <p>Tel: +86 311 8596 3888 8356</p>
-
-                        <p>FAX: +86 311 8596 3666</p>
-
-                        <p>Address: No.189, Hengshan Street, Shijiazhuang High-tech Development Zone, Hebei Province,
-                            China</p>
-
-                        <p>Postcode: 050035</p>
-
-                        <p>E- mail: <a href="mailto:huanengfitting.carol@gmail.com">huanengfitting.carol@gmail.com</a>
-                        </p>
-
-                        <p style="text-align: center;"><a href="contact-us.html"><img alt="About Us"
-                                    src="http://image.chukouplus.com/upload/C_1613/file/20231121/05f87c6998a83466e64dd77d4d1efe35.png?x-oss-process=image/format,webp"
-                                    title="About Us"></a></p>
-
-                        <p><br>
-                            <strong>Main applications For Fittings for OPGW and ADSS</strong>
-                        </p>
-
-                        <p><strong>1. Characteristics</strong></p>
-
-                        <p>Screw is the main characteristic of hardware applications for OPGW and ADSS. The structural
-                            reinforcing rods and dead end have large holding area, the stress are well-proportioned. The
-                            whole unit is gently, so the vibration can be minimized, and the optical fiber cable can be
-                            protected very well. Easily applied on installation, and no specific tolls required for
-                            installation.</p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>2. <a href="products/adss-preformed-suspension-clamp.html"><span
-                                        style="color:#2980b9;">Suspension for OPGW and ADSS</span></a></strong></p>
-
-                        <p>It applies on the pole where line angle no exceeding than 25&deg;for OPGW and ADSS. The unit
-                            does use a combination of structural reinforcing rods, outer rods, housing and resilient
-                            cable inserts to reduce compression clamping and bending stress on the cable and glass
-                            fibers. Negative effects of wind induced cable motions such as aeolian vibration, galloping
-                            and wind sway are also minimized. Its holding strength is 10%-20% of the cable&rsquo;s UTS.
-                        </p>
-
-                        <p>&nbsp;</p>
-
-                        <p><img alt="About Us"
-                                src="http://image.chukouplus.com/upload/C_1613/file/20220406/f5b1435698eeeebe771bf3db2644831e.jpeg?x-oss-process=image/format,webp"
-                                title="About Us"></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>3. Dead-ends for OPGW and ADSS</strong></p>
-
-                        <p>It applies on terminal pole and long span pole where line angle is exceeding 25&deg;for OPGW
-                            and ADSS. The double layer of rods transfer axial tensile forces and distribute radial
-                            compressive forces into the dead-end component ensuring maximum holding strength without
-                            causing cable jacket damage of fiber attenuation. Its holing strength is over 95% of the
-                            cables ultimate tension strain. (UTS)</p>
-
-                        <p>&nbsp;</p>
-
-                        <p><img alt="About Us"
-                                src="http://image.chukouplus.com/upload/C_1613/file/20220406/ea2b155866a03faab7299a2fa25a0e24.jpeg?x-oss-process=image/format,webp"
-                                title="About Us"></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>4. <a href="products/vibration-damper.html"><span style="color:#2980b9;">Vibration
-                                        damper</span></a></strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><img alt="About Us"
-                                src="http://image.chukouplus.com/upload/C_1613/file/20220406/64fd2a1486428412ae3e45b95b99d2b7.jpeg?x-oss-process=image/format,webp"
-                                title="About Us"></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>5. <a href="products/fl-spiral-vibration-damper.html"><span
-                                        style="color:#2980b9;">Spiral vibration damper</span></a></strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><img alt="About Us"
-                                src="http://image.chukouplus.com/upload/C_1613/file/20220406/024f7f3983b4c05cf2e3bb98d312b14f.jpeg?x-oss-process=image/format,webp"
-                                title="About Us"></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>6. <a href="products/splice-closure.html"><span style="color:#2980b9;">Splice
-                                        closure</span></a></strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><img alt="About Us"
-                                src="http://image.chukouplus.com/upload/C_1613/file/20220406/014ee14ea63d2bca20e411e6b4da2db1.jpeg?x-oss-process=image/format,webp"
-                                title="About Us"></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>Main applications For conductor fittings:</strong></p>
-
-                        <p><strong>1. Performed guy grip</strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong><img alt="About Us"
-                                    src="http://image.chukouplus.com/upload/C_1613/file/20220406/2ba56c945537c88b04a91aa65c0acfee.jpeg?x-oss-process=image/format,webp"
-                                    title="About Us"></strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>2. Splice rods</strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong><img alt="About Us"
-                                    src="http://image.chukouplus.com/upload/C_1613/file/20220406/9e4eae42966cc975fe04c46104a7060b.jpeg?x-oss-process=image/format,webp"
-                                    title="About Us"></strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>3. Repair rods</strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong><img alt="About Us"
-                                    src="http://image.chukouplus.com/upload/C_1613/file/20220406/0bdca035aacde6f14cfaa713b8b9833c.jpeg?x-oss-process=image/format,webp"
-                                    title="About Us"></strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong>4. Armor rods</strong></p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong><img alt="About Us"
-                                    src="http://image.chukouplus.com/upload/C_1613/file/20220406/fc471e5f7e926986592a91bcaeab7a6f.jpeg?x-oss-process=image/format,webp"
-                                    title="About Us"></strong></p>
-
-                        <p><br>
-                            <strong>5. Spiral vibration damper</strong>
-                        </p>
-
-                        <p>&nbsp;</p>
-
-                        <p><strong><img alt="About Us"
-                                    src="http://image.chukouplus.com/upload/C_1613/file/20220406/af035f97025baa473c7215e83f91dff7.jpeg?x-oss-process=image/format,webp"
-                                    title="About Us"></strong></p>
-                    </body> -->
 
                     </html>
                 </div>
@@ -351,31 +313,33 @@
 
             <div class="f-top">
                 <div class="flist1 pull-left flist">
-                    <p class="footer-title">Navigation</p>
+                    <p class="footer-title" data-i18n-footer="navigation">Navigation</p>
                     <ul class="box-list">
-                        <li><a href="index.html" title="Home">Home</a></li>
-                        <li><a href="about-us.html" title="About Us">About Us</a></li>
-                        <li><a href="products.html" title="Products">Products</a></li>
-                        <li><a href="contact-us.html" title="Contact Us">Contact Us</a></li>
+                        <li><a href="index.html" title="Home" data-i18n-nav="home">Home</a></li>
+                        <li><a href="about-us.html" title="About Us" data-i18n-nav="about">About Us</a></li>
+                        <li><a href="products.html" title="Products" data-i18n-nav="products">Products</a></li>
+                        <li><a href="contact-us.html" title="Contact Us" data-i18n-nav="contact">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="flist2 pull-left flist">
-                    <p class="footer-title">Contact Us</p>
+                    <p class="footer-title" data-i18n-footer="contactUs">Contact Us</p>
                     <ul class="box-list">
-                        <li>E-mail: <a href="mailto:527276908@qq.com"><span
-                                    style="display:inline-block; direction:ltr">527276908@qq.com</span></a>
+                        <li><span data-i18n-contact="email">E-mail</span>: <a
+                                href="mailto:zhenguanhebei@gmail.com"><span
+                                    style="display:inline-block; direction:ltr">zhenguanhebei@gmail.com</span></a>
                         </li>
-                        <li>Mobile: <span style="display:inline-block; direction:ltr">+86 157 3377 6606</span></li>
-                        <li>Tel.: <span style="display:inline-block; direction:ltr">+86 0317 22085743</span></li>
-                        <li>WeChat: <span style="display:inline-block; direction:ltr">Lxd527276908</span></li>
+                        <li>WhatApps: <span style="display:inline-block; direction:ltr">+86 157 3377 6606</span></li>
+                        <li><span data-i18n-contact="wechat">E-mail</span>: <span
+                                style="display:inline-block; direction:ltr">15733776606</span></li>
+                        <li>Facebook: <span style="display:inline-block; direction:ltr">Xiangdong Li</span></li>
                     </ul>
                 </div>
                 <div class="flist3 pull-left flist">
-                    <p class="footer-title">Address</p>
+                    <p class="footer-title" data-i18n-footer="address">Address</p>
                     <ul class="box-list">
-                        <li>地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧</li>
-                        <li>成立时间：2020年11月11日</li>
+                        <li data-i18n-contact="companyAddress">North of Fiscal Bureau...</li>
+                        <li data-i18n-contact="founded">Established: 2020-11-11</li>
                     </ul>
                 </div>
 
@@ -401,6 +365,48 @@
     <script src="themes/template/0614/static/js/common2.js"></script>
     <script src="themes/common/static/js/common.js" type="text/javascript" charset="utf-8"></script>
 
+    <script>
+        // 初始化语言
+        function initLanguage () {
+            // 设置按钮状态
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            // 初始加载内容
+            updateContent();
+        }
+
+        // 切换语言事件
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.dataset.lang;
+                localStorage.setItem('selectedLang', currentLang);
+                initLanguage();
+            });
+        });
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initLanguage);
+
+        // 高德地图信息窗口国际化
+        function updateMapContent () {
+            const infoWindowContent = currentLang === 'zh' ?
+                '<div style="padding:10px;">真观国际贸易有限公司</div>' :
+                '<div style="padding:10px;">Zhenguan International Trade Co., Ltd.</div>';
+
+            infoWindow.setContent(infoWindowContent);
+        }
+
+        // 在原有地图代码后添加
+        marker.on('click', function () {
+            updateMapContent();
+            infoWindow.open(map, marker.getPosition());
+        });
+
+        // 初始化时更新地图内容
+        updateMapContent();
+    </script>
 </body>
 
 </html>

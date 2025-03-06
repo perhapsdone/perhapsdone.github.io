@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og:http://ogp.me/ns#">
 
-<!-- Mirrored from www.huanengfitting.com/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Nov 2024 03:13:32 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -22,6 +20,7 @@
     <link rel="stylesheet" href="themes/template/0614/static/css/chat.css">
     <link rel="stylesheet" href="themes/template/0614/static/css/common.css">
     <link rel="stylesheet" href="themes/template/0614/static/css/main.css">
+
 
     <script type="text/javascript" src="themes/template/0614/static/js/jquery-1.11.3.min.js"></script>
 
@@ -47,6 +46,114 @@
 
     <script src='https://webapi.amap.com/maps?v=2.0&key=ce3d33f73d4e6587ee3993a8e054a649'
         type="text/javascript"> </script>
+
+
+    <!-- 在<head>标签内添加以下样式 -->
+    <style>
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-btn {
+            padding: 5px 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .language-btn.active {
+            background: #276DC1;
+            color: white;
+            border-color: #276DC1;
+        }
+    </style>
+    <script>
+        // 多语言配置
+        const i18n = {
+            en: {
+                // 导航
+                nav: {
+                    home: "Home",
+                    about: "About Us",
+                    products: "Products",
+                    contact: "Contact Us"
+                },
+                // 联系信息
+                contact: {
+                    title: "Contact Us",
+                    tel: "Tel",
+                    email: "E-mail",
+                    address: "Address",
+                    wechat: "WeChat",
+                    founded: "Established Date: November 11, 2020",
+                    companyAddress: "Address: North of Fiscal Bureau Residential Area, Jianshe East Road, Renqiu City, Hebei Province"
+                },
+                // 页脚
+                footer: {
+                    navigation: "Navigation",
+                    contactUs: "Contact Us",
+                    address: "Address",
+                    copyright: "Copyright © Hebei Zhenguan International Trade Co., Ltd. All Rights Reserved."
+                }
+            },
+            zh: {
+                nav: {
+                    home: "首页",
+                    about: "关于我们",
+                    products: "产品中心",
+                    contact: "联系我们"
+                },
+                contact: {
+                    title: "联系我们",
+                    tel: "电话",
+                    email: "电子邮箱",
+                    address: "地址",
+                    wechat: "微信",
+                    founded: "成立时间：2020年11月11日",
+                    companyAddress: "地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧"
+                },
+                footer: {
+                    navigation: "导航",
+                    contactUs: "联系我们",
+                    address: "地址",
+                    copyright: "版权所有 © 河北真观国际贸易有限公司"
+                }
+            }
+        };
+
+        // 初始化语言
+        let currentLang = localStorage.getItem('selectedLang') || 'en';
+
+        function updateContent () {
+            // 更新导航
+            document.querySelectorAll('[data-i18n-nav]').forEach(el => {
+                const key = el.getAttribute('data-i18n-nav');
+                el.textContent = i18n[currentLang].nav[key];
+            });
+
+            // 更新联系信息
+            document.querySelectorAll('[data-i18n-contact]').forEach(el => {
+                const key = el.getAttribute('data-i18n-contact');
+                el.textContent = i18n[currentLang].contact[key];
+            });
+
+            // 更新页脚
+            document.querySelectorAll('[data-i18n-footer]').forEach(el => {
+                const key = el.getAttribute('data-i18n-footer');
+                el.textContent = i18n[currentLang].footer[key];
+            });
+
+            // 更新页面标题和元数据
+            document.title = i18n[currentLang].contact.title;
+            document.documentElement.lang = currentLang;
+        }
+    </script>
 </head>
 
 <body>
@@ -74,83 +181,54 @@
             </a>
         </div>
         <div class="h-bot fix">
+            <!-- 修改导航菜单 -->
             <ul class="navlist fix">
-                <li> <a href="index.html" title="Home">Home</a> </li>
-                <li> <a href="about-us.html" title="About Us">About Us</a> </li>
-                <li> <a href="products.html" title="Products">Products</a></li>
-                <li class="nav-active"> <a href="contact-us.html" title="Contact Us">Contact Us</a> </li>
+                <li><a href="index.html" data-i18n-nav="home">Home</a></li>
+                <li><a href="about-us.html" data-i18n-nav="about">About Us</a></li>
+                <li><a href="products.html" data-i18n-nav="products">Products</a></li>
+                <li class="nav-active"><a href="contact-us.html" data-i18n-nav="contact">Contact Us</a></li>
             </ul>
+
+        </div>
+
+
+        <!-- 在<body>开始标签后添加语言切换按钮 -->
+        <div class="language-switcher">
+            <button class="language-btn" data-lang="en">EN</button>
+            <button class="language-btn" data-lang="zh">中文</button>
         </div>
     </header>
 
 
+
+
     <div class="bread">
-        <!-- <div class="item-top">
-            <div class="wp"><span style="display:inline-block; direction:ltr">Contact Us</span></div>
-        </div> -->
         <div class="wp">
-            <p class="item-title"> <a href="index.html" style="display:inline-block; direction:ltr">Home</a>
-                > <span class="active" style="display:inline-block; direction:ltr">Contact Us</span>
+            <p class="item-title"> <a href="index.html" style="display:inline-block; direction:ltr"
+                    data-i18n-nav="home">Home</a>
+                > <span class="active" style="display:inline-block; direction:ltr" data-i18n-nav="contact">Contact
+                    Us</span>
             </p>
         </div>
     </div>
 
     <h1 class="disnone">Contact Us</h1>
     <div class="page_wrap">
-        <div class="wp">
+        <div class="wp2">
             <div class="contact-main">
+
+                <!-- 修改联系信息部分 -->
                 <div class="contact-info">
-
-                    <!DOCTYPE html
-                        PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-                    <html>
-
-                    <body>
-                        <p><strong>Hebei Zhenguan International Trade Co., Ltd.</strong></p>
-
-                        <p>Tel.:&nbsp;+86 157 3377 6606</p>
-
-                        <p>Phone:&nbsp;+86 0317 22085743</p>
-
-                        <p>Fax:&nbsp;暂无</p>
-
-                        <p>WeChat:&nbsp;Lxd527276908</p>
-
-                        <p>E-mail:&nbsp;<a href="mailto:527276908@qq.com" one-link-mark="yes">527276908@qq.com</a></p>
-
-                        <p>Add.:&nbsp;中国河北省沧州市任丘市建设东路财政局居民小区北侧</p>
-                    </body>
-                    <!-- Mirrored from www.huanengfitting.com/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Nov 2024 03:13:32 GMT -->
-
-                    </html>
+                    <p><span data-i18n-contact="tel">Tel</span>: +86 157 3377 6606</p>
+                    <p>Facebook: Xiangdong Li</p>
+                    <p>YouTube: @xiangdongli-qm4mh</p>
+                    <p><span data-i18n-contact="email">E-mail</span>:
+                        <a href="mailto:zhenguanhebei@gmail.com">zhenguanhebei@gmail.com</a>
+                    </p>
+                    <p><span data-i18n-contact="address">Address</span>:
+                        <span data-i18n-contact="companyAddress">North of Fiscal Bureau Residential Area...</span>
+                    </p>
                 </div>
-                <!-- <div class="contact-form">
-                    <form action="https://www.huanengfitting.com/index/inquiry/inquirypost/source/1.html">
-                        <div class="item-row">
-                            <p>* Name</p> <input type="text" placeholder="" name="name" />
-                        </div>
-                        <div class="item-row">
-                            <p>* E-mail</p> <input type="text" name="email" placeholder="" />
-                        </div>
-                        <div class="item-row">
-                            <p> Country</p> <input type="text" name="country" placeholder="" />
-                        </div>
-                        <div class="item-row">
-                            <p>* Message</p> <textarea placeholder="" name="content"></textarea>
-                        </div>
-                        <div class="item-row">
-                            <p>* CAPTCHA</p> <input type="text" name="code" placeholder="" class="code-input" />
-                            <div class="code-img">
-
-                                <img src="index/common/verify/id/11.png" class=" refresh-inquiry-code"
-                                    onclick="this.src='index/common/verify/id/11d41d.png?'+Math.random()" alt="CAPTCHA"
-                                    title="CAPTCHA">
-                            </div> <input type="button" value="Send" onclick="subSinglePageInquiry(this)"
-                                class="code-btn" />
-                            <div class="clear"></div>
-                        </div>
-                    </form>
-                </div> -->
 
 
                 <div id="mapContainer" style="width: 100%; height: 450px;"></div>
@@ -186,37 +264,38 @@
         </div>
     </div>
 
-
     <footer class="footer wp1">
         <div class="wp2">
 
             <div class="f-top">
                 <div class="flist1 pull-left flist">
-                    <p class="footer-title">Navigation</p>
+                    <p class="footer-title" data-i18n-footer="navigation">Navigation</p>
                     <ul class="box-list">
-                        <li><a href="index.html" title="Home">Home</a></li>
-                        <li><a href="about-us.html" title="About Us">About Us</a></li>
-                        <li><a href="products.html" title="Products">Products</a></li>
-                        <li><a href="contact-us.html" title="Contact Us">Contact Us</a></li>
+                        <li><a href="index.html" title="Home" data-i18n-nav="home">Home</a></li>
+                        <li><a href="about-us.html" title="About Us" data-i18n-nav="about">About Us</a></li>
+                        <li><a href="products.html" title="Products" data-i18n-nav="products">Products</a></li>
+                        <li><a href="contact-us.html" title="Contact Us" data-i18n-nav="contact">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="flist2 pull-left flist">
-                    <p class="footer-title">Contact Us</p>
+                    <p class="footer-title" data-i18n-footer="contactUs">Contact Us</p>
                     <ul class="box-list">
-                        <li>E-mail: <a href="mailto:527276908@qq.com"><span
-                                    style="display:inline-block; direction:ltr">527276908@qq.com</span></a>
+                        <li><span data-i18n-contact="email">E-mail</span>: <a
+                                href="mailto:zhenguanhebei@gmail.com"><span
+                                    style="display:inline-block; direction:ltr">zhenguanhebei@gmail.com</span></a>
                         </li>
-                        <li>Mobile: <span style="display:inline-block; direction:ltr">+86 157 3377 6606</span></li>
-                        <li>Tel.: <span style="display:inline-block; direction:ltr">+86 0317 22085743</span></li>
-                        <li>WeChat: <span style="display:inline-block; direction:ltr">Lxd527276908</span></li>
+                        <li>WhatApps: <span style="display:inline-block; direction:ltr">+86 157 3377 6606</span></li>
+                        <li><span data-i18n-contact="wechat">E-mail</span>: <span
+                                style="display:inline-block; direction:ltr">15733776606</span></li>
+                        <li>Facebook: <span style="display:inline-block; direction:ltr">Xiangdong Li</span></li>
                     </ul>
                 </div>
                 <div class="flist3 pull-left flist">
-                    <p class="footer-title">Address</p>
+                    <p class="footer-title" data-i18n-footer="address">Address</p>
                     <ul class="box-list">
-                        <li>地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧</li>
-                        <li>成立时间：2020年11月11日</li>
+                        <li data-i18n-contact="companyAddress">North of Fiscal Bureau...</li>
+                        <li data-i18n-contact="founded">Established: 2020-11-11</li>
                     </ul>
                 </div>
 
@@ -240,6 +319,50 @@
     <script src="themes/template/0614/static/js/common.js"></script>
     <script src="themes/template/0614/static/js/common2.js"></script>
     <script src="themes/common/static/js/common.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <script>
+        // 初始化语言
+        function initLanguage () {
+            // 设置按钮状态
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            // 初始加载内容
+            updateContent();
+        }
+
+        // 切换语言事件
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.dataset.lang;
+                localStorage.setItem('selectedLang', currentLang);
+                initLanguage();
+            });
+        });
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initLanguage);
+
+        // 高德地图信息窗口国际化
+        function updateMapContent () {
+            const infoWindowContent = currentLang === 'zh' ?
+                '<div style="padding:10px;">真观国际贸易有限公司</div>' :
+                '<div style="padding:10px;">Zhenguan International Trade Co., Ltd.</div>';
+
+            infoWindow.setContent(infoWindowContent);
+        }
+
+        // 在原有地图代码后添加
+        marker.on('click', function () {
+            updateMapContent();
+            infoWindow.open(map, marker.getPosition());
+        });
+
+        // 初始化时更新地图内容
+        updateMapContent();
+    </script>
 
 </body>
 

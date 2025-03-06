@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="mul">
+
+<head>
+    <meta charset="UTF-8">
+    <title>多语言网站示例</title>
+    <style>
+        /* 语言切换器样式 */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-btn {
+            padding: 8px 15px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .language-btn.active {
+            background: #276DC1;
+            color: white;
+            border-color: #276DC1;
+        }
+
+        /* 内容样式 */
+        .content {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="language-switcher" id="languageSwitcher"></div>
+
+    <div class="content">
+        <h1 data-i18n="welcome_title"></h1>
+        <p data-i18n="welcome_message"></p>
+        <p data-i18n="current_time"></p>
+        <p data-i18n="visitor_info"></p>
+    </div>
+
+    <script>
+        // 配置参数
+        const CONFIG = {
+            defaultLanguage: 'en',
+            fallbackLanguage: 'en',
+            storageKey: 'user_lang',
+            ipApiUrl: 'https://geolocation-db.com/json/',
+            languages: {
+                en: { name: 'English', file: 'lang/en.json' },
+                zh: { name: '中文', file: 'lang/zh.json' },
+                ja: { name: '日本語', file: 'lang/ja.json' },
+                es: { name: 'Español', file: 'lang/es.json' },
+                fr: { name: 'Français', file: 'lang/fr.json' }
+            }
+        };
+
+        // 核心类
+        class I18n {
+            constructor() {
+                this.currentLang = null;
+                this.translations = {};
+            }
+
+            async init () {
+                await this.detectInitialLanguage();
+                await this.loadLanguage(this.currentLang);
+                this.renderLanguageSwitcher();
+                this.updateContent();
+            }
+
+            async detectInitialLanguage () {
+                // 优先级：用户保存 > URL参数 > IP检测 > 浏览器语言
+                const savedLang = localStorage.getItem(CONFIG.storageKey);
+                if (savedLang) return this.setLanguage(savedLang);
+
+                const urlLang = new URLSearchParams(location.search).get('lang');
+                if (urlLang && CONFIG.languages[urlLang]) return this.setLanguage(urlLang);
+
+                const ipLang = await this.detectLanguageByIP();
+                if (ipLang) return this.setLanguage(ipLang);
+
+                const browserLang = this.getBrowserLanguage();
+                return this.setLanguage(browserLang);
+            }
+
+            async detectLanguageByIP () {
+                try {
+                    const response = await fetch(CONFIG.ipApiUrl);
+                    const data = await response.json();
+                    const countryCode = data.country_code?.toLowerCase();
+
+                    // IP与语言映射（可扩展）
+                    const countryToLang = {
+                        cn: 'zh',
+                        tw: 'zh',
+                        hk: 'zh',
+                        jp: 'ja',
+                        es: 'es',
+                        fr: 'fr',
+                        ca: 'fr'
+                    };
+
+                    return countryToLang[countryCode] || CONFIG.defaultLanguage;
+                } catch {
+                    return CONFIG.defaultLanguage;
+                }
+            }
+
+            getBrowserLanguage () {
+                const browserLangs = navigator.languages || [navigator.language];
+                for (const lang of browserLangs) {
+                    const code = lang.substr(0, 2);
+                    if (CONFIG.languages[code]) return code;
+                }
+                return CONFIG.defaultLanguage;
+            }
+
+            async loadLanguage (langCode) {
+                if (!CONFIG.languages[langCode]) langCode = CONFIG.fallbackLanguage;
+                if (this.translations[langCode]) return;
+
+                try {
+                    const response = await fetch(CONFIG.languages[langCode].file);
+                    this.translations[langCode] = await response.json();
+                } catch {
+                    console.error(`Failed to load ${langCode} translations`);
+                    if (langCode !== CONFIG.fallbackLanguage) {
+                        await this.loadLanguage(CONFIG.fallbackLanguage);
+                    }
+                }
+            }
+
+            setLanguage (langCode) {
+                this.currentLang = CONFIG.languages[langCode] ? langCode : CONFIG.fallbackLanguage;
+                localStorage.setItem(CONFIG.storageKey, this.currentLang);
+            }
+
+            t (key, params = {}) {
+                const translation = this.translations[this.currentLang]?.[key] ||
+                    this.translations[CONFIG.fallbackLanguage]?.[key] ||
+                    key;
+
+                return translation.replace(/\${(.*?)}/g, (_, p1) => params[p1] || '');
+            }
+
+            renderLanguageSwitcher () {
+                const container = document.getElementById('languageSwitcher');
+                container.innerHTML = Object.entries(CONFIG.languages)
+                    .map(([code, lang]) => `
+                <button class="language-btn ${code === this.currentLang ? 'active' : ''}" 
+                        data-lang="${code}">
+                    ${lang.name}
+                </button>
+            `).join('');
+
+                container.addEventListener('click', async (e) => {
+                    if (e.target.dataset.lang) {
+                        this.setLanguage(e.target.dataset.lang);
+                        await this.loadLanguage(this.currentLang);
+                        this.updateContent();
+                        this.renderLanguageSwitcher();
+                    }
+                });
+            }
+
+            updateContent () {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.dataset.i18n;
+                    const params = {
+                        country: navigator.language,
+                        ip: '加载中...',
+                        time: new Date().toLocaleTimeString(this.currentLang)
+                    };
+
+                    el.innerHTML = this.t(key, params);
+                });
+
+                // 异步获取IP信息
+                fetch(CONFIG.ipApiUrl)
+                    .then(r => r.json())
+                    .then(data => {
+                        document.querySelectorAll('[data-i18n="visitor_info"]').forEach(el => {
+                            el.innerHTML = this.t('visitor_info', {
+                                ip: data.IPv4,
+                                country: data.country_name
+                            });
+                        });
+                    });
+            }
+        }
+
+        // 初始化
+        const i18n = new I18n();
+        i18n.init();
+    </script>
+</body>
+
+</html>
