@@ -72,6 +72,52 @@
             color: white;
             border-color: #276DC1;
         }
+
+        .contact-info {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            color: #333;
+            align-items: center;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-info li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info .label {
+            flex: 0 0 100px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-info .value {
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .contact-info a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
     </style>
     <script>
         // 多语言配置
@@ -92,7 +138,7 @@
                     address: "Address",
                     wechat: "WeChat",
                     founded: "Established Date: November 11, 2020",
-                    companyAddress: "Address: North of Fiscal Bureau Residential Area, Jianshe East Road, Renqiu City, Hebei Province"
+                    companyAddress: "North of Fiscal Bureau Residential Area, Jianshe East Road, Renqiu City, Hebei Province"
                 },
                 // 页脚
                 footer: {
@@ -116,7 +162,7 @@
                     address: "地址",
                     wechat: "微信",
                     founded: "成立时间：2020年11月11日",
-                    companyAddress: "地址：中国河北省沧州市任丘市建设东路财政局居民小区北侧"
+                    companyAddress: "中国河北省沧州市任丘市建设东路财政局居民小区北侧"
                 },
                 footer: {
                     navigation: "导航",
@@ -217,8 +263,37 @@
         <div class="wp">
             <div class="contact-main">
 
-                <!-- 修改联系信息部分 -->
                 <div class="contact-info">
+                    <ul>
+                        <li>
+                            <span class="label" data-i18n-contact="tel">Tel</span>
+                            <span class="value">+86 157 3377 6606</span>
+                        </li>
+                        <li>
+                            <span class="label">Facebook</span>
+                            <span class="value">Xiangdong Li</span>
+                        </li>
+                        <li>
+                            <span class="label">YouTube</span>
+                            <span class="value">@xiangdongli-qm4mh</span>
+                        </li>
+                        <li>
+                            <span class="label" data-i18n-contact="email">E-mail</span>
+                            <span class="value">
+                                <a href="mailto:zhenguanhebei@gmail.com">zhenguanhebei@gmail.com</a>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="label" data-i18n-contact="address">Address</span>
+                            <span class="value" data-i18n-contact="companyAddress">North of Fiscal Bureau Residential
+                                Area...</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- 修改联系信息部分 -->
+                <!-- <div class="contact-info">
                     <p><span data-i18n-contact="tel">Tel</span>: +86 157 3377 6606</p>
                     <p>Facebook: Xiangdong Li</p>
                     <p>YouTube: @xiangdongli-qm4mh</p>
@@ -228,7 +303,7 @@
                     <p><span data-i18n-contact="address">Address</span>:
                         <span data-i18n-contact="companyAddress">North of Fiscal Bureau Residential Area...</span>
                     </p>
-                </div>
+                </div> -->
 
 
                 <div id="mapContainer" style="width: 100%; height: 450px;"></div>
